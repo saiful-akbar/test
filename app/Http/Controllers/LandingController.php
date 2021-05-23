@@ -10,19 +10,17 @@ use Illuminate\Http\Request;
 
 class LandingController extends Controller
 {
-    private function getGeneral() {
-        $profile = Profile::first();
-        $sosmeds = Sosmed::all();
-        $menus = Article::select("article_title", "article_url")
+    private $general_profile;
+    private $general_sosmeds;
+    private $general_menus;
+
+    function __construct() {
+        $this->general_profile = Profile::first();
+        $this->general_sosmeds = Sosmed::all();
+        $this->general_menus = Article::select("article_title", "article_url")
             ->where("article_publish", 1)
             ->orderBy("article_title", "asc")
             ->get();
-
-        return [
-            'profile' => $profile,
-            'sosmeds' => $sosmeds,
-            'menus'   => $menus
-        ];
     }
 
     /**
@@ -32,13 +30,12 @@ class LandingController extends Controller
      */
     public function index()
     {
-        $general = $this->getGeneral();
         $articles = Article::where('article_publish', 1)->orderBy('article_title', 'asc')->get();
 
         return view('pages.landing.index', [
-            'profile'  => $general['profile'],
-            'sosmeds'  => $general['sosmeds'],
-            'menus'    => $general['menus'],
+            'profile'  => $this->general_profile,
+            'sosmeds'  => $this->general_sosmeds,
+            'menus'    => $this->general_menus,
             'articles' => $articles,
         ]);
     }
@@ -56,77 +53,12 @@ class LandingController extends Controller
         ]);
 
         Message::create([
-            'message_name' => htmlspecialchars($request->name),
-            'message_email' => htmlspecialchars($request->email),
+            'message_name'        => htmlspecialchars($request->name),
+            'message_email'       => htmlspecialchars($request->email),
             'message_description' => htmlspecialchars($request->message),
+            'message_read_status' => false,
         ]);
 
         return redirect()->route('landing.index')->with("success", 'Your message has been sent');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        echo "Hello";
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

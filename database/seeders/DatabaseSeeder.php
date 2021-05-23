@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
         // create profile data
         Profile::create([
             "user_id"                => $user->id,
-            "profile_avatar"         => "img/avatar/avatar.jpg",
+            "profile_avatar"         => "storage/images/avatar/1.jpg",
             "profile_first_name"     => "Saiful",
             "profile_last_name"      => "Akbar",
             "profile_date_of_birth"  => "13",

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use App\Models\Sosmed;
 use App\Models\Profile;
 use Illuminate\Notifications\Notifiable;
@@ -45,5 +46,21 @@ class User extends Authenticatable
     public function sosmed()
     {
         return $this->hasOne(Sosmed::class, "user_id", "id");
+    }
+
+    /**
+     * Merubah format created_at
+     */
+    public function getCreatedAtAttribute()
+    {
+        return Carbon::parse($this->attributes['created_at'])->format('d M Y H:i');
+    }
+
+    /**
+     * Merubah format updated_at
+     */
+    public function getUpdatedAtAttribute()
+    {
+        return Carbon::parse($this->attributes['updated_at'])->format('d M Y H:i');
     }
 }

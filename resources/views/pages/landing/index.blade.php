@@ -1,9 +1,9 @@
-@extends('main-layouts.index')
+@extends('layouts.main.index')
 
 @section('title', 'Welcome')
 
 @section('banner')
-    <section id="banner" class="major">
+    <section id="banner" class="major" style="background-image: url('{{ asset('/assets/images/bg/bg-landing.jpeg') }}')">
         <div class="inner">
             <header class="major">
                 <h1>Hi, my name is {{ $profile->profile_first_name }} {{ $profile->profile_last_name }}</h1>

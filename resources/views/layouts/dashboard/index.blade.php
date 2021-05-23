@@ -76,21 +76,28 @@
                         {{-- [ content ] Start --}}
                         <div class="container-fluid flex-grow-1 container-p-y">
 
-                            {{-- [ Page title ] --}}
-                            <h4 class="font-weight-bold py-3 mb-0">@yield('title')</h4>
+                            {{-- [Header content] --}}
+                            <div class="d-flex">
+                                <div class="flex-grow-1">
+                                    <h4 class="font-weight-bold py-3 mb-0">@yield('title')</h4>
+                                    <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item">
+                                                <a href="{{ route('dashboard.home') }}">
+                                                    <i class="feather icon-home"></i>
+                                                </a>
+                                            </li>
 
-                            {{-- [ Breadcrumb ] --}}
-                            <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item">
-                                        <a href="{{ route('dashboard.home') }}">
-                                            <i class="feather icon-home"></i>
-                                        </a>
-                                    </li>
+                                            @yield('breadcrumb')
+                                        </ol>
+                                    </div>
+                                </div>
 
-                                    @yield('breadcrumb')
-                                </ol>
+                                <div class="d-flex justify-content-end align-items-center">
+                                    @yield('back')
+                                </div>
                             </div>
+                            {{-- [header content] end --}}
 
                             {{-- [ Manin content] --}}
                             @yield('content')

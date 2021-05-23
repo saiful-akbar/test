@@ -1,25 +1,22 @@
 @extends('layouts.dashboard.index')
 
+@section('title', 'Message')
+
 @section('css')
     <link rel="stylesheet" href="{{ asset('assets/dashboard-layouts/css/pages/messages.css') }}">
 @endsection
-
-@section('title', 'Message')
 
 @section('breadcrumb')
     <li class="breadcrumb-item active">Message</li>
 @endsection
 
+@section('back')
+    <a href="{{ route('dashboard.home') }}" class="btn btn-default btn-round">
+        <span class="fas fa-angle-left"></span>  Back
+    </a>
+@endsection
+
 @section('content')
-    <div class="row mb-3">
-        <div class="col-sm-12">
-            <div class="float-right">
-                <a href="{{ route('dashboard.home') }}" class="btn btn-default btn-round">
-                    <span class="fas fa-angle-left"></span>  Back
-                </a>
-            </div>
-        </div>
-    </div>
 
     {{-- Alert response delete --}}
     @if (session('deleted'))

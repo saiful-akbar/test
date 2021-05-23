@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\MessageController;
 
 /**
  * Route guest
@@ -33,14 +34,13 @@ Route::middleware(['auth'])->group(function () {
         /**
          * Home route
          */
-        Route::get('home', [HomeController::class, 'index'])->name('dashboard.home.index');
+        Route::get('home', [HomeController::class, 'index'])->name('dashboard.home');
 
         /**
          * Route message
          */
-        Route::get('message', function () {
-            echo "Halaman Pesan";
-        })->name("dashboard.message");
+        Route::get('message', [MessageController::class, 'index'])->name("dashboard.message");
+        Route::delete('message/{message}', [MessageController::class, 'delete'])->name('dashboard.message.delete');
 
         Route::get('message/{id}', function ($id) {
             $message = Message::find($id);

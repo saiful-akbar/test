@@ -26,7 +26,7 @@
 
         {{-- Home --}}
         <li class="sidenav-item {{ Request::is('app/home*') ? 'active' : null }}">
-            <a href="{{ route('dashboard.home.index') }}" class="sidenav-link">
+            <a href="{{ route('dashboard.home') }}" class="sidenav-link">
                 <i class="sidenav-icon feather icon-home"></i>
                 <div>Home</div>
             </a>

@@ -37,7 +37,7 @@ class AuthController extends Controller
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
             $request->session()->regenerate();
 
-            return redirect()->route('dashboard.home.index')->with('login', 'Selamat datang boss');
+            return redirect()->route('dashboard.home')->with('login', 'Selamat datang boss');
         }
 
         return back()->withInput()->withErrors([
@@ -62,6 +62,6 @@ class AuthController extends Controller
             return redirect()->route('landing.index');
         }
 
-        return redirect()->route('dashboard.home.index');
+        return redirect()->route('dashboard.home');
     }
 }

@@ -12,7 +12,7 @@
     </ul>
     <ul class="actions stacked">
         @auth
-            <li><a href="{{ route('dashboard.home.index') }}" class="button primary fit">Dashboard</a></li>
+            <li><a href="{{ route('dashboard.home') }}" class="button primary fit">Dashboard</a></li>
         @endauth
 
         @auth

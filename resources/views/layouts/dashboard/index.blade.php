@@ -5,6 +5,8 @@
 <head>
     <title>@yield('title') | Saiful Akbar Dashboard</title>
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
@@ -80,7 +82,11 @@
                             {{-- [ Breadcrumb ] --}}
                             <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#"><i class="feather icon-home"></i></a></li>
+                                    <li class="breadcrumb-item">
+                                        <a href="{{ route('dashboard.home') }}">
+                                            <i class="feather icon-home"></i>
+                                        </a>
+                                    </li>
 
                                     @yield('breadcrumb')
                                 </ol>
@@ -123,6 +129,7 @@
 
     {{-- Libs --}}
     <script src="{{ asset('assets/dashboard-layouts/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
+    <script src="{{ asset('assets/dashboard-layouts/libs/bootbox/bootbox.js') }}"></script>
 
     {{-- Demo  --}}
     <script src="{{ asset('assets/dashboard-layouts/js/demo.js') }}"></script>
@@ -130,6 +137,9 @@
 
     {{-- Pages script --}}
     @yield('script')
+
+    {{-- Main script --}}
+    <script src="{{ asset('assets/dashboard-layouts/js/main.js') }}"></script>
 </body>
 
 </html>

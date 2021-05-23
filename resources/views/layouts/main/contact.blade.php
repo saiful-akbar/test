@@ -37,9 +37,7 @@
                         </div>
                         <div class="field">
                             <label for="message">Message</label>
-                            <textarea name="message" id="message" rows="6" required maxlength="200">
-                                {{ old('message') }}
-                            </textarea>
+                            <textarea name="message" id="message" rows="6" required maxlength="200">{{old('message')}}</textarea>
                         </div>
                     </div>
                     <ul class="actions">

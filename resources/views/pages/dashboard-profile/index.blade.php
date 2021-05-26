@@ -444,7 +444,7 @@
             const viewAvatar = document.querySelector('#view-avatar');
 
             formProfile.reset();
-            viewAvatar.src = "{{ asset($profile->profile_avatar) }}";
+            viewAvatar.src = "{{ asset('storage/'.$profile->profile_avatar) }}";
         });
 
     </script>

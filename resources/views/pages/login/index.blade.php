@@ -92,7 +92,7 @@
 
                             <div class="d-flex justify-content-between align-items-center m-0">
                                 <button type="submit" class="btn btn-primary">Sign In</button>
-                                <a href="{{ route('landing.index') }}" class="btn btn-outline-primary">Return to the main page</a>
+                                <a href="{{ route('main.home') }}" class="btn btn-outline-primary">Return to the main page</a>
                             </div>
                         </form>
                         {{-- [ Form ] End --}}
@@ -104,4 +104,9 @@
 
         </div>
     </div>
+@endsection
+
+
+@section('script')
+    <script src="{{ asset('assets/dashboard-layouts/js/pages/misc_ladda.js') }}"></script>
 @endsection

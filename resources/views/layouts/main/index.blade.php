@@ -1,81 +1,83 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-        <title>@yield("title") | Saiful Akbar</title>
+<!DOCTYPE html>
+<html lang="en">
 
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-        <meta name="theme-color" content="#000000" />
-        <meta name="description" content="My persoal website" />
-        <meta name="author" content="Saiful Akbar" />
-        <meta name="keywords" content="Saiful Akbar, saiful, akbar, saiful-akbar, saiful-akbar13, saifulakbar13, ackbar_syaiful@yahoo.com, personal website" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="base-url" content="{{ url('/') }}">
 
-        {{-- Konfigurasi PWA di iOS --}}
-        <meta name="apple-mobile-web-app-title" content="Saiful Akbar" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>@yield('title')</title>
+    <meta content="Personal website saiful akbar" name="description">
+    <meta content="personal website, portofolio, saiful akbar, saifulakbar.com" name="keywords">
 
-        <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}" />
-        <link rel="icon" href="{{ asset('/favicon.ico') }}" type="image/svg+xml" id="icon" />
+    {{-- Favicons --}}
+    <link href="{{ asset('favicon.ico') }}" rel="icon">
+    <link href="{{ asset('assets/main-layouts/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
-        {{-- Bootstrap CSS --}}
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"/>
+    {{-- Google Fonts --}}
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-        {{-- Main CSS --}}
-        <link rel="stylesheet" href="{{ asset('assets/main-layouts/css/main.css') }}" />
-		<noscript><link rel="stylesheet" href="{{ asset('assets/main-layouts/css/noscript.css') }}" /></noscript>
-    </head>
+    {{-- Vendor CSS Files --}}
+    <link href="{{ asset('assets/main-layouts/vendor/aos/aos.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/main-layouts/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/main-layouts/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/main-layouts/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/main-layouts/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/main-layouts/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
-	<body class="is-preload">
+    <link rel="stylesheet" href="{{ asset('assets/main-layouts/vendor/perfect-scrollbar/perfect-scrollbar.css') }}">
 
-		{{-- Wrapper --}}
-        <div id="wrapper">
+    {{-- Template Main CSS File --}}
+    <link href="{{ asset('assets/main-layouts/css/style.css') }}" rel="stylesheet">
 
-            {{-- Top bar --}}
-            @include("layouts.main.header")
+    {{-- CSS Pages --}}
+    @yield('main.css')
+</head>
 
-            {{-- Menu --}}
-            @include("layouts.main.menu")
+<body>
 
-            {{-- Banner --}}
-            @yield("banner")
+  {{-- Mobile nav toggle button --}}
+  <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
 
-            {{-- Main Content--}}
-            <div id="main">
-                @yield("content")
-            </div>
+  {{-- Header --}}
+  @include('layouts.main.sidenav')
 
-            {{-- Contact --}}
-            @include("layouts.main.contact")
-
-
-            {{-- Footer --}}
-            @include("layouts.main.footer")
-
+  @section('main.content')
+    <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
+        <div class="hero-container" data-aos="fade-in">
+            <h1>{{ $profile->profile_first_name }} {{ $profile->profile_last_name }}</h1>
+            <p>
+                <span class="typed" data-typed-items="Welcome to my personal website, I'm  Web Developer"></span>
+            </p>
         </div>
+    </section>
+  @show
 
+    {{-- Button back to top --}}
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+        <i class="bi bi-arrow-up-short"></i>
+    </a>
 
-        {{-- Bootstrap Bundle with Popper --}}
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-            crossorigin="anonymous"
-        ></script>
+    {{-- Vendor JS Files --}}
+    <script src="{{ asset('assets/main-layouts/vendor/aos/aos.js') }}"></script>
+    <script src="{{ asset('assets/main-layouts/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/main-layouts/vendor/glightbox/js/glightbox.min.js') }}"></script>
+    <script src="{{ asset('assets/main-layouts/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
+    <script src="{{ asset('assets/main-layouts/vendor/purecounter/purecounter.js') }}"></script>
+    <script src="{{ asset('assets/main-layouts/vendor/swiper/swiper-bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/main-layouts/vendor/typed.js/typed.min.js') }}"></script>
+    <script src="{{ asset('assets/main-layouts/vendor/waypoints/noframework.waypoints.js') }}"></script>
 
-        {{-- Main Scripts --}}
-        <script src="{{ asset('assets/main-layouts/js/jquery.min.js') }}"></script>
-        <script src="{{ asset('assets/main-layouts/js/jquery.scrolly.min.js') }}"></script>
-        <script src="{{ asset('assets/main-layouts/js/jquery.scrollex.min.js') }}"></script>
-        <script src="{{ asset('assets/main-layouts/js/browser.min.js') }}"></script>
-        <script src="{{ asset('assets/main-layouts/js/breakpoints.min.js') }}"></script>
-        <script src="{{ asset('assets/main-layouts/js/util.js') }}"></script>
-        <script src="{{ asset('assets/main-layouts/js/main.js') }}"></script>
+    <script src="{{ asset('assets/main-layouts/vendor/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
 
-        {{-- Pages Script --}}
-        @yield("script")
+    {{-- Template Main JS File --}}
+    <script src="{{ asset('assets/main-layouts/js/main.js') }}"></script>
 
-	</body>
+    {{-- Script pages --}}
+    @yield('main.script')
+
+</body>
+
 </html>

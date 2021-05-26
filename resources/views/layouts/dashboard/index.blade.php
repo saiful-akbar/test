@@ -3,9 +3,10 @@
 <html lang="en" class="material-style layout-fixed">
 
 <head>
-    <title>@yield('title') | Saiful Akbar Dashboard</title>
+    <title>@yield('title') - Saiful Akbar Dashboard</title>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="base-url" content="{{ url('/') }}">
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -136,17 +137,19 @@
 
     {{-- Libs --}}
     <script src="{{ asset('assets/dashboard-layouts/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
+    <script src="{{ asset('assets/dashboard-layouts/libs/vanilla-text-mask/vanilla-text-mask.js') }}"></script>
     <script src="{{ asset('assets/dashboard-layouts/libs/bootbox/bootbox.js') }}"></script>
 
     {{-- Demo  --}}
     <script src="{{ asset('assets/dashboard-layouts/js/demo.js') }}"></script>
     <script src="{{ asset('assets/dashboard-layouts/js/analytics.js') }}"></script>
 
+    {{-- Main script --}}
+    <script src="{{ asset('assets/dashboard-layouts/js/main.js') }}"></script>
+
     {{-- Pages script --}}
     @yield('script')
 
-    {{-- Main script --}}
-    <script src="{{ asset('assets/dashboard-layouts/js/main.js') }}"></script>
 </body>
 
 </html>

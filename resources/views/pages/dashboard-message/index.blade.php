@@ -2,19 +2,16 @@
 
 @section('title', 'Message')
 
+
 @section('css')
     <link rel="stylesheet" href="{{ asset('assets/dashboard-layouts/css/pages/messages.css') }}">
 @endsection
+
 
 @section('breadcrumb')
     <li class="breadcrumb-item active">Message</li>
 @endsection
 
-@section('back')
-    <a href="{{ route('dashboard.home') }}" class="btn btn-default btn-round">
-        <span class="fas fa-angle-left"></span>  Back
-    </a>
-@endsection
 
 @section('content')
 
@@ -66,8 +63,13 @@
                 {{-- Controls --}}
                 <div class="media flex-wrap align-items-center py-1 px-2">
                     <div class="text-muted mr-3 ml-auto">
-                        {{ $messages->firstItem() }} - {{ $messages->lastItem() }} of {{ $messages->total() }}
+                        @if ($messages->total() <= 0)
+                            0 - 0 of 0
+                        @else
+                            {{ $messages->firstItem() }} - {{ $messages->lastItem() }} of {{ $messages->total() }}
+                        @endif
                     </div>
+
                     <div class="d-flex flex-wrap">
                         <a href="{{ $messages->previousPageUrl() }}" class="btn btn-default borderless md-btn-flat icon-btn text-muted">
                             <i class="ion ion-ios-arrow-back"></i>
@@ -94,7 +96,7 @@
                                 data-id="{{ $message->id }}"
                             ></a>
 
-                            <a href="{{ route('dashboard.message.detail', ['id' => $message->id]) }}" class="message-sender flex-shrink-1 d-block text-dark" >
+                            <a href="{{ route('dashboard.message.detail', ['message' => $message->id]) }}" class="message-sender flex-shrink-1 d-block text-dark" >
 
                                 @if ($message->message_read_status === 0)
                                     <span class="badge badge-dot badge-info mr-1"></span>
@@ -103,7 +105,7 @@
                                 {{ $message->message_name }}
                             </a>
 
-                            <a href="{{ route('dashboard.message.detail', ['id' => $message->id]) }}" class="message-subject flex-shrink-1 d-block text-dark {{ $message->message_read_status == 0 ? 'font-weight-bold' : null }}" >
+                            <a href="{{ route('dashboard.message.detail', ['message' => $message->id]) }}" class="message-subject flex-shrink-1 d-block text-dark {{ $message->message_read_status == 0 ? 'font-weight-bold' : null }}" >
                                 <div class="text-truncate" style="max-width: 500px;">
                                     {{ $message->message_description }}
                                 </div>
@@ -129,14 +131,17 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('assets/dashboard-layouts/js/pages/pages_messages.js') }}"></script>
     <script>
         $(document).ready(function () {
+
+            // Fungsi ketika pesan dihapus
             $('.btn-delete-message').on('click', function (e) {
                 e.preventDefault();
 
+                // ambil id dari pesan yang dipilih
                 const id = $(this).attr('data-id');
 
+                // Bootbox comfirm
                 bootbox.confirm({
                     title: "Delete",
                     message: "Are you sure you want this message?",
@@ -151,8 +156,11 @@
                         }
                     },
                     callback: result => {
-                        if (result) {
-                            const form = $('#form-delete-message').attr('action', `{{ url('/app/message') }}/${id}`);
+                        if (result) { // jika pesan dihapus
+                            const baseUrl = $('meta[name=base-url]').attr('content');
+                            const form = $('#form-delete-message');
+
+                            form.attr('action', `${baseUrl}/app/message/${id}`);
                             form.submit();
                         }
                     }

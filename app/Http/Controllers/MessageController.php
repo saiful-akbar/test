@@ -28,6 +28,11 @@ class MessageController extends Controller
         ]);
     }
 
+    /**
+     * Method hapus pesan
+     *
+     * @param Message $message
+     */
     public function delete(Message $message) {
         $delete = Message::destroy($message->id);
 
@@ -36,6 +41,20 @@ class MessageController extends Controller
         }
 
         return redirect()->route('dashboard.message')->with('failed', 'Message failed to delete');
+    }
 
+    /**
+     * Method halaman detail pesan
+     *
+     * @param Message $message
+     */
+    public function detail(Message $message) {
+
+        if ($message->message_read_status == 0 || $message->message_read_status == false) {
+            $message->message_read_status = 1;
+            $message->save();
+        }
+
+        return view('pages.dashboard-message.detail', ['message' => $message]);
     }
 }

@@ -1,24 +1,26 @@
 <?php
 
-use App\Models\Message;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\LandingController;
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ProfileController;
 
 /**
  * Route guest
  */
-Route::get('/', [LandingController::class, 'index'])->name('landing.index');
-Route::post('/message', [LandingController::class, 'sendMessage'])->name('landing.send.message');
+Route::get('/', [MainController::class, 'index'])->name('main.home');
+Route::post('/message', [MainController::class, 'sendMessage'])->name('main.send.message');
 
 /**
  * Route auth
  */
-Route::get('/login', [AuthController::class, 'index'])->name('login');
-Route::post('/login', [AuthController::class, 'login'])->name('login.user');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::prefix('auth')->group(function () {
+    Route::get('/login', [AuthController::class, 'index'])->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('login.user');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
 
 
 /**
@@ -39,18 +41,19 @@ Route::middleware(['auth'])->group(function () {
         /**
          * Route message
          */
-        Route::get('message', [MessageController::class, 'index'])->name("dashboard.message");
-        Route::delete('message/{message}', [MessageController::class, 'delete'])->name('dashboard.message.delete');
+        Route::prefix('message')->group(function () {
+            Route::get('/', [MessageController::class, 'index'])->name("dashboard.message");
+            Route::get('/{message}', [MessageController::class, 'detail'])->name("dashboard.message.detail");
+            Route::delete('/{message}', [MessageController::class, 'delete'])->name('dashboard.message.delete');
+        });
 
-        Route::get('message/{id}', function ($id) {
-            $message = Message::find($id);
-
-            if ($message->message_read_status == 0) {
-                $message->message_read_status = 1;
-                $message->save();
-            }
-
-            echo "Halaman Detail Pesan id {$id} telah dibaca";
-        })->name("dashboard.message.detail");
+        /**
+         * Route profile
+         */
+        Route::prefix('profile')->group(function () {
+            Route::get('/', [ProfileController::class, 'index'])->name('dashboard.profile');
+            Route::patch('/{profile}', [ProfileController::class, 'updateProfile'])->name('dashboard.profile.update');
+            Route::patch('/account/{user}', [ProfileController::class, 'updateAccount'])->name('dashboard.account.update');
+        });
     });
 });

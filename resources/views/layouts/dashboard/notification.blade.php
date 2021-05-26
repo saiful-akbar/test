@@ -36,14 +36,14 @@ $messages = Message::orderBy('message_read_status', 'asc')
 
         <div class="list-group list-group-flush">
             @foreach ($messages as $message)
-                <a  href="{{ route('dashboard.message.detail', ['id' => $message->id]) }}" class="list-group-item list-group-item-action media d-flex align-items-center" >
+                <a  href="{{ route('dashboard.message.detail', ['message' => $message->id]) }}" class="list-group-item list-group-item-action media d-flex align-items-center" >
                     <div class="ui-icon ui-icon-sm feather icon-message-square border-0 text-white {{ $message->message_read_status == 1 ? 'bg-secondary' : 'bg-success' }}"></div>
                     <div class="media-body ml-3">
                         <div class="text-dark line-height-condenced text-truncate" style="max-width: 200px;">
-                            {{ $message->message_description }}
+                            {{ $message->message_name }}
                         </div>
-                        <div class="text-light small mt-1">
-                            {{ $message->message_name }} - {{ $message->message_email }}
+                        <div class="text-light small mt-1 text-truncate" style="max-width: 250px;">
+                            {{ $message->message_subject }} - {{ $message->message_description }}
                         </div>
                         <div class="text-light small mt-1">
                             {{ $message->created_at }}

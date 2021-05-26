@@ -54,7 +54,7 @@ $user = User::find(Auth::user()->id)->profile()->first();
             <div class="demo-navbar-user nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
                     <span class="d-inline-flex flex-lg-row-reverse align-items-center align-middle">
-                        <img src="{{ asset($user->profile_avatar) }}" alt class="d-block ui-w-30 rounded-circle">
+                        <img src="{{ asset('storage/'.$user->profile_avatar) }}" alt class="d-block ui-w-30 rounded-circle">
                         <span class="px-1 mr-lg-2 ml-2 ml-lg-0">{{ $user->profile_first_name }} {{ $user->profile_last_name }}</span>
                     </span>
                 </a>

@@ -17,7 +17,7 @@ class AuthController extends Controller
 
         // Cek apakah user sudah login atau belum
         if (Auth::check()) {
-            return redirect()->route('dashboard.home.index');
+            return redirect()->route('dashboard.home');
         }
 
         return view('pages.login.index');
@@ -59,7 +59,7 @@ class AuthController extends Controller
             $request->session()->invalidate();
             $request->session()->regenerateToken();
 
-            return redirect()->route('landing.index');
+            return redirect()->route('main.home');
         }
 
         return redirect()->route('dashboard.home');

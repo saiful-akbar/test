@@ -18,7 +18,7 @@
 
         {{-- Welcome page / Kit --}}
         <li class="sidenav-item">
-            <a href="{{ route('landing.index') }}" class="sidenav-link">
+            <a href="{{ route('main.home') }}" class="sidenav-link">
                 <i class="sidenav-icon feather icon-grid"></i>
                 <div>Welcome Page</div>
             </a>
@@ -34,12 +34,12 @@
 
         {{-- Layouts --}}
         <li class="sidenav-divider mb-1"></li>
-        <li class="sidenav-header small font-weight-semibold">UI Components</li>
+        <li class="sidenav-header small font-weight-semibold">Components</li>
 
         <li class="sidenav-item">
-            <a href="typography.html" class="sidenav-link">
-                <i class="sidenav-icon feather icon-type"></i>
-                <div>Typography</div>
+            <a href="{{ route('dashboard.profile') }}" class="sidenav-link">
+                <i class="sidenav-icon feather icon-user"></i>
+                <div>Account & Profile</div>
             </a>
         </li>
     </ul>

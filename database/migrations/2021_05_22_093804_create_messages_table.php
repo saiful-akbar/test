@@ -17,7 +17,8 @@ class CreateMessagesTable extends Migration
             $table->id();
             $table->string("message_name", 100);
             $table->string("message_email", 100);
-            $table->text('message_description');
+            $table->string("message_subject", 100)->nullable();
+            $table->text('message_description')->nullable();
             $table->boolean('message_read_status');
             $table->timestamps();
         });

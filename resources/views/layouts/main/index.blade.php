@@ -60,6 +60,9 @@
         <i class="bi bi-arrow-up-short"></i>
     </a>
 
+    {{-- JQuery --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
     {{-- Vendor JS Files --}}
     <script src="{{ asset('assets/main-layouts/vendor/aos/aos.js') }}"></script>
     <script src="{{ asset('assets/main-layouts/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

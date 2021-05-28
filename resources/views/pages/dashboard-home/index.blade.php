@@ -7,23 +7,17 @@
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card mb-4 overflow-hidden">
-                <div class="card-body">
-                    <div class="card-badges bg-danger text-white"><span>Urgent</span></div>
-                    <a href="javascript:void(0)" class="text-dark text-large font-weight-semibold">Account Director</a>
-                    <div class="d-flex flex-wrap mt-3">
-                        <div class="mr-3"><i class="vacancy-tooltip mr-1 ion ion-md-business text-light" title="Department"></i> Marketing</div>
-                        <div class="mr-3"><i class="vacancy-tooltip mr-1 ion ion-md-pin text-light" title="Location"></i> UK wide</div>
-                        <div class="mr-3"><i class="vacancy-tooltip mr-1 ion ion-md-time text-primary" title="Employment"></i> Full-time</div>
-                    </div>
-                    <div class="my-3">
-                        Donec dui risus, sagittis non congue vitae, auctor ornare ex. Aliquam hendrerit, odio vel dictum volutpat, nulla sapien venenatis tellus, vel aliquam enim eros vel ligula. Duis dictum, tellus et feugiat
-                        viverra.
-                    </div>
-                    <div class="text-right">
-                        <button type="button" class="btn btn-primary btn-round">Learn more</button>
+    <div class="row mb-3">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="row row-bordered mx-0">
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-4">
+                        <a href="{{ route('dashboard.profile') }}" class="text-dark my-2">
+                            <div class="card-body text-center py-4">
+                                <div class="lnr lnr-users display-4 text-primary"></div>
+                                <h5 class="m-0 mt-3">Account & Profile</h5>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>

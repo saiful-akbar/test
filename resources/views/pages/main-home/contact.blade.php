@@ -4,18 +4,6 @@
         <h2>Contact</h2>
     </div>
 
-    @if (session('success'))
-        <div class="row mb-3" data-aos="fade-in">
-            <div class="col-sm-12">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>{{ session('success') }}</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            </div>
-        </div>
-    @endif
-
-
     <div class="row" data-aos="fade-in">
         <div class="col-lg-5 d-flex align-items-stretch">
             <div class="info">
@@ -48,9 +36,8 @@
 
         {{-- Form contact --}}
         <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-            <form action="{{ route('main.send.message') }}" method="post" class="php-email-form" name="form-message">
-                @csrf
-                @method('POST')
+            <form action="{{ route('main.send.message') }}" method="post" class="php-email-form" id="form-message">
+                @csrf @method('POST')
 
                 <div class="row">
                     <div class="form-group col-md-6">
@@ -60,15 +47,10 @@
                             name="name"
                             id="name"
                             value="{{ old('name') }}"
-                            class="form-control @error('name') is-invalid @enderror"
+                            class="form-control"
                             required
                         />
-
-                        @error('name')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        <div class="invalid-feedback" data-error="email"></div>
                     </div>
 
                     <div class="form-group col-md-6">
@@ -78,15 +60,11 @@
                             name="email"
                             id="email"
                             value="{{ old('email') }}"
-                            class="form-control @error('email') is-invalid @enderror"
+                            class="form-control"
                             required
-                        />
 
-                        @error('email')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        />
+                        <div class="invalid-feedback" data-error="email"></div>
                     </div>
                 </div>
 
@@ -97,36 +75,85 @@
                         name="subject"
                         id="subject"
                         value="{{ old('subject') }}"
-                        class="form-control @error('subject') is-invalid @enderror"
+                        class="form-control"
                         required
                     />
-
-                    @error('subject')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
+                    <div class="invalid-feedback" data-error="subject"></div>
                 </div>
 
                 <div class="form-group">
                     <label for="message">Message *</label>
-                    <textarea name="message" id="message" class="form-control @error('subject') is-invalid @enderror" rows="10" required>
-                        {{ old('message') }}
-                    </textarea>
-
-                    @error('subject')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
+                    <textarea name="message" id="message" class="form-control" rows="10" required >{{ old('message') }}</textarea>
+                    <div class="invalid-feedback" data-error="message"></div>
                 </div>
 
                 <div class="text-center">
-                    <button type="submit">Send Message</button>
+                    <button type="submit" name="submit-message">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none;"></span>
+                        Send Message
+                    </button>
                 </div>
+
+                <div class="alert alert-success alert-dismissible fade show mt-3" role="alert" id="alert-response-message" style="display: none;"></div>
             </form>
         </div>
         {{-- End form contact --}}
 
     </div>
 </div>
+
+
+@section('main.script')
+    <script>
+        $(document).ready(function () {
+            $('#form-message').submit(function (e) {
+                e.preventDefault();
+
+                const form = $(this);
+                const buttonSubmit = $('button[name=submit-message]');
+                const spinner = buttonSubmit.children('span');
+                const input = $('#form-message .form-control');
+                const invalidFeedback = $('#form-message .invalid-feedback');
+                const alert = $('#alert-response-message');
+
+                input.removeClass('is-invalid');
+                input.attr('readonly', true);
+                invalidFeedback.hide();
+                spinner.show();
+                buttonSubmit.attr('disabled', true);
+
+                $.ajax({
+                    type: "POST",
+                    url: form.attr('action'),
+                    data: form.serialize(),
+                    dataType: "json",
+                    success: function (res) {
+                        input.attr('readonly', false);
+                        buttonSubmit.attr('disabled', false);
+                        spinner.hide();
+                        alert.text(res.message);
+                        alert.fadeIn();
+                        form[0].reset();
+
+                        setTimeout(() => {
+                            alert.fadeOut();
+                        }, 10000);
+                    },
+                    error: function(err) {
+                        invalidFeedback.show();
+                        input.attr('readonly', false);
+                        buttonSubmit.attr('disabled', false);
+                        spinner.hide();
+
+                        const {errors} = err.responseJSON;
+
+                        Object.keys(errors).find(key => {
+                            $(`#${key}`).addClass('is-invalid');
+                            $(`div[data-error=${key}]`).text(errors[key]);
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+@endsection

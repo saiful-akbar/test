@@ -30,8 +30,8 @@
 
                         {{-- Sender & date --}}
                         <div class="mb-1">
-                            {{ $message->message_name }} &lt;
-                            <a href="mailto:{{ $message->message_email }}">{{ $message->message_email }}</a>&gt;
+                            {{ $message->message_name }}
+                            <<a href="mailto:{{ $message->message_email }}" target="_blank">{{ $message->message_email }}</a>>
                             <span class="text-muted ml-2">{{ $message->created_at }}</span>
                         </div>
 
@@ -40,9 +40,9 @@
                     </div>
                 </div>
                 <hr class="border-light m-0">
-                {{-- / Header --}}
+                {{-- End Header --}}
 
-                <!-- Controls -->
+                {{-- Controls --}}
                 <div class="media flex-wrap align-items-center py-1 px-2">
                     <div class="media-body d-flex flex-wrap flex-basis-100 flex-basis-sm-auto">
                         <button type="button" id="btn-delete-message" class="btn btn-default borderless btn-lg md-btn-flat icon-btn messages-tooltip text-muted" title="Delete Message" data-toggle="tooltip">
@@ -51,13 +51,11 @@
                     </div>
                 </div>
                 <hr class="border-light m-0">
-                <!-- / Controls -->
+                {{-- End Controls --}}
 
                 {{-- Message content --}}
                 <div class="p-4">{{ $message->message_description }}</div>
-
                 <hr class="border-light m-0">
-                {{-- / Message content --}}
 
             </div>
         </div>

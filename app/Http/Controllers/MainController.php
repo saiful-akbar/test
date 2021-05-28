@@ -33,7 +33,7 @@ class MainController extends Controller
     public function sendMessage(Request $request) {
         $request->validate([
             "name"    => "required|string|max:100",
-            "email"   => "required|email:rfc,dns|max:100",
+            "email"   => "required|email:filter|max:100",
             "subject" => "required|string|max:100",
             "message" => "required|string|max:200"
         ]);
@@ -46,6 +46,8 @@ class MainController extends Controller
             "message_read_status" => false,
         ]);
 
-        return redirect()->route("main.home")->with("success", "Your message has been sent");
+        return response()->json([
+            "message" => "Thank you {$request->name}, your message has been sent",
+        ], 200);
     }
 }

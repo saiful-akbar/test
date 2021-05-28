@@ -16,14 +16,6 @@
     {{-- Links --}}
     <ul class="sidenav-inner py-1">
 
-        {{-- Welcome page / Kit --}}
-        <li class="sidenav-item">
-            <a href="{{ route('main.home') }}" class="sidenav-link">
-                <i class="sidenav-icon feather icon-grid"></i>
-                <div>Welcome Page</div>
-            </a>
-        </li>
-
         {{-- Home --}}
         <li class="sidenav-item {{ Request::is('app/home*') ? 'active' : null }}">
             <a href="{{ route('dashboard.home') }}" class="sidenav-link">
@@ -32,11 +24,20 @@
             </a>
         </li>
 
-        {{-- Layouts --}}
+        {{-- Welcome page / Kit --}}
+        <li class="sidenav-item">
+            <a href="{{ route('main.home') }}" class="sidenav-link">
+                <i class="sidenav-icon feather icon-grid"></i>
+                <div>Welcome Page</div>
+            </a>
+        </li>
+
+        {{-- Components --}}
         <li class="sidenav-divider mb-1"></li>
         <li class="sidenav-header small font-weight-semibold">Components</li>
 
-        <li class="sidenav-item">
+        {{-- Component => account & profile --}}
+        <li class="sidenav-item {{ Request::is('app/profile*') ? 'active' : null }}">
             <a href="{{ route('dashboard.profile') }}" class="sidenav-link">
                 <i class="sidenav-icon feather icon-user"></i>
                 <div>Account & Profile</div>

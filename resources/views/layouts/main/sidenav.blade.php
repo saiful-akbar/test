@@ -59,7 +59,7 @@ $sosmeds = Sosmed::all();
 
                 @guest
                     <li>
-                        <a href="{{ route('login') }}">
+                        <a href="{{ route('login') }}" target="_blank">
                             <i class="bx bx-log-in-circle"></i> <span>Log In</span>
                         </a>
                     </li>

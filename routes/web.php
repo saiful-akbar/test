@@ -69,6 +69,7 @@ Route::middleware(["auth"])->group(function () {
              */
             Route::prefix("education")->group(function () {
                 Route::get("/", [EducationController::class, "index"])->name("dashboard.education");
+                Route::get("/create", [EducationController::class, "create"])->name("dashboard.education.create");
                 Route::get("/{education}", [EducationController::class, "detail"])->name("dashboard.education.detail");
             });
 

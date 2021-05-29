@@ -90,9 +90,13 @@
                                 <div class="clearfix"></div>
                             </div>
 
-                            <div class="d-flex justify-content-between align-items-center m-0">
-                                <button type="submit" class="btn btn-primary">Sign In</button>
-                                <a href="{{ route('main.home') }}" class="btn btn-outline-primary">Return to the main page</a>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <button type="submit" class="btn btn-primary btn-round btn-block mb-3">Sign In</button>
+                                </div>
+                                <div class="col-sm-12">
+                                    <a href="{{ route('main.home') }}" class="btn btn-outline-secondary btn-round btn-block">Return to the main page</a>
+                                </div>
                             </div>
                         </form>
                         {{-- [ Form ] End --}}
@@ -104,9 +108,4 @@
 
         </div>
     </div>
-@endsection
-
-
-@section('script')
-    <script src="{{ asset('assets/dashboard-layouts/js/pages/misc_ladda.js') }}"></script>
 @endsection

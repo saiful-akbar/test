@@ -211,7 +211,7 @@
                             {{-- Form tanggal lahir --}}
                             <div class="form-group col-md-4 @error('date_of_birth') position-relative mb-5 @enderror">
                                 <label for="date-of-birth" class="form-label">Date Of Birth *</label>
-                                <select name="date_of_birth" id="date-of-birth" class="form-control @error('date_of_birth') is-invalid @enderror" required>
+                                <select name="date_of_birth" id="date-of-birth" class="form-control select2 @error('date_of_birth') is-invalid @enderror" required>
                                     @for ($i = 1; $i <= 31; $i++)
                                         <option value="{{ $i }}" @if ($i == $profile->profile_date_of_birth) selected @endif>{{ $i }}</option>
                                     @endfor
@@ -226,7 +226,7 @@
                             {{-- form bulan lahir --}}
                             <div class="form-group col-md-4 @error('month_of_birth') position-relative mb-5 @enderror">
                                 <label for="month-of-birth" class="form-label">Month Of Birth *</label>
-                                <select name="month_of_birth" id="month-of-birth" class="form-control @error('month_of_birth') is-invalid @enderror" required>
+                                <select name="month_of_birth" id="month-of-birth" class="form-control select2 @error('month_of_birth') is-invalid @enderror" required>
                                     <option value="January" @if ($profile->profile_month_of_birth == 'January') selected @endif>January</option>
                                     <option value="February" @if ($profile->profile_month_of_birth == 'February') selected @endif>February</option>
                                     <option value="March" @if ($profile->profile_month_of_birth == 'March') selected @endif>March</option>
@@ -250,7 +250,7 @@
                             {{-- form tahun lahir --}}
                             <div class="form-group col-md-4 @error('year_of_birth') position-relative mb-5 @enderror">
                                 <label for="year-of-birth" class="form-label">Year Of Birth *</label>
-                                <select name="year_of_birth" id="year-of-birth" class="form-control @error('year_of_birth') is-invalid @enderror" required>
+                                <select name="year_of_birth" id="year-of-birth" class="form-control select2 @error('year_of_birth') is-invalid @enderror" required>
                                     @for ($i = date('Y'); $i >= date('Y') - 100; $i--)
                                         <option value="{{ $i }}" @if ($i == $profile->profile_year_of_birth) selected @endif>{{ $i }}</option>
                                     @endfor

@@ -34,4 +34,8 @@ class EducationController extends Controller
             'education' => $education
         ], 200);
     }
+
+    public function create() {
+        return view('pages.dashboard-education.create');
+    }
 }

@@ -34,6 +34,12 @@
 
     {{-- Libs --}}
     <link rel="stylesheet" href="{{ asset('assets/dashboard-layouts/libs/perfect-scrollbar/perfect-scrollbar.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/dashboard-layouts/libs/select2/select2.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/dashboard-layouts/libs/ladda/ladda.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/dashboard-layouts/libs/toastr/toastr.css') }}">
+
+    {{-- Main CSS --}}
+    <link rel="stylesheet" href="{{ asset('assets/dashboard-layouts/css/main.css') }}">
 
     {{-- CSS pages --}}
     @yield('css')
@@ -139,7 +145,11 @@
 
     {{-- Libs --}}
     <script src="{{ asset('assets/dashboard-layouts/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
+    <script src="{{ asset('assets/dashboard-layouts/libs/select2/select2.js') }}"></script>
     <script src="{{ asset('assets/dashboard-layouts/libs/vanilla-text-mask/vanilla-text-mask.js') }}"></script>
+    <script src="{{ asset('assets/dashboard-layouts/libs/spin/spin.js') }}"></script>
+    <script src="{{ asset('assets/dashboard-layouts/libs/ladda/ladda.js') }}"></script>
+    <script src="{{ asset('assets/dashboard-layouts/libs/toastr/toastr.js') }}"></script>
     <script src="{{ asset('assets/dashboard-layouts/libs/bootbox/bootbox.js') }}"></script>
 
     {{-- Demo  --}}

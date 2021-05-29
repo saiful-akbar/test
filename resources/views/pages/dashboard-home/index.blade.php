@@ -7,6 +7,14 @@
 @endsection
 
 @section('content')
+
+    @if (session('login-success'))
+        <div class="alert alert-dark-success alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {{ session('login-success') }}
+        </div>
+    @endif
+
     <div class="row mb-3">
         <div class="col-sm-12">
             <div class="card">
@@ -14,8 +22,35 @@
                     <div class="col-6 col-sm-4 col-md-3 col-lg-4">
                         <a href="{{ route('dashboard.profile') }}" class="text-dark my-2">
                             <div class="card-body text-center py-4">
-                                <div class="lnr lnr-users display-4 text-primary"></div>
+                                <div class="feather icon-user display-4 text-primary"></div>
                                 <h5 class="m-0 mt-3">Account & Profile</h5>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-4">
+                        <a href="{{ route('dashboard.education') }}" class="text-dark my-2">
+                            <div class="card-body text-center py-4">
+                                <div class="feather icon-book display-4 text-primary"></div>
+                                <h5 class="m-0 mt-3">Education</h5>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-4">
+                        <a href="{{ route('dashboard.work-experience') }}" class="text-dark my-2">
+                            <div class="card-body text-center py-4">
+                                <div class="feather icon-briefcase display-4 text-primary"></div>
+                                <h5 class="m-0 mt-3">Work Experience</h5>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-4">
+                        <a href="{{ route('dashboard.skill') }}" class="text-dark my-2">
+                            <div class="card-body text-center py-4">
+                                <div class="feather icon-codepen display-4 text-primary"></div>
+                                <h5 class="m-0 mt-3">Skill</h5>
                             </div>
                         </a>
                     </div>

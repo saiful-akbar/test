@@ -11,95 +11,30 @@
             @include('pages.main-home.about')
         </section>
 
-
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
             <path fill="#F3F4F5" fill-opacity="1" d="M0,128L48,128C96,128,192,128,288,149.3C384,171,480,213,576,192C672,171,768,85,864,85.3C960,85,1056,171,1152,197.3C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
         </svg>
 
-
-        {{-- Skills Section --}}
-        <section id="skills" class="skills section-bg">
-            @include('pages.main-home.skill')
+        {{-- Resume Section --}}
+        <section id="resume" class="resume section-bg">
+            @include('pages.main-home.resume')
         </section>
-
 
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
             <path fill="#F3F4F5" fill-opacity="1" d="M0,224L48,202.7C96,181,192,139,288,144C384,149,480,203,576,208C672,213,768,171,864,181.3C960,192,1056,256,1152,256C1248,256,1344,192,1392,160L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
         </svg>
 
-
-        {{-- Resume Section --}}
-        <section id="resume" class="resume">
-            <div class="container">
-
-            <div class="section-title">
-                <h2>Resume</h2>
-                <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-6" data-aos="fade-up">
-                    <h3 class="resume-title">Sumary</h3>
-                    <div class="resume-item pb-0">
-                        <h4>Alex Smith</h4>
-                        <p>
-                            <em>Innovative and deadline-driven Graphic Designer with 3+ years of experience designing and developing user-centered digital/print marketing material from initial concept to final, polished deliverable.</em>
-                        </p>
-
-                        <ul>
-                            <li>Portland par 127,Orlando, FL</li>
-                            <li>(123) 456-7891</li>
-                            <li>alice.barkley@example.com</li>
-                        </ul>
-                    </div>
-
-                    <h3 class="resume-title">Education</h3>
-                    <div class="resume-item">
-                        <h4>Master of Fine Arts &amp; Graphic Design</h4>
-                        <h5>2015 - 2016</h5>
-                        <p><em>Rochester Institute of Technology, Rochester, NY</em></p>
-                        <p>Qui deserunt veniam. Et sed aliquam labore tempore sed quisquam iusto autem sit. Ea vero voluptatum qui ut dignissimos deleniti nerada porti sand markend</p>
-                    </div>
-
-                    <div class="resume-item">
-                        <h4>Bachelor of Fine Arts &amp; Graphic Design</h4>
-                        <h5>2010 - 2014</h5>
-                        <p><em>Rochester Institute of Technology, Rochester, NY</em></p>
-                        <p>Quia nobis sequi est occaecati aut. Repudiandae et iusto quae reiciendis et quis Eius vel ratione eius unde vitae rerum voluptates asperiores voluptatem Earum molestiae consequatur neque etlon sader mart dila</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                    <h3 class="resume-title">Professional Experience</h3>
-                    <div class="resume-item">
-                        <h4>Senior graphic design specialist</h4>
-                        <h5>2019 - Present</h5>
-                        <p><em>Experion, New York, NY </em></p>
-                        <ul>
-                            <li>Lead in the design, development, and implementation of the graphic, layout, and production communication materials</li>
-                            <li>Delegate tasks to the 7 members of the design team and provide counsel on all aspects of the project. </li>
-                            <li>Supervise the assessment of all graphic materials in order to ensure quality and accuracy of the design</li>
-                            <li>Oversee the efficient use of production project budgets ranging from $2,000 - $25,000</li>
-                        </ul>
-                    </div>
-
-                    <div class="resume-item">
-                        <h4>Graphic design specialist</h4>
-                        <h5>2017 - 2018</h5>
-                        <p><em>Stepping Stone Advertising, New York, NY</em></p>
-                        <ul>
-                            <li>Developed numerous marketing programs (logos, brochures,infographics, presentations, and advertisements).</li>
-                            <li>Managed up to 5 projects or tasks at a given time while under pressure</li>
-                            <li>Recommended and consulted with clients on the most appropriate graphic design</li>
-                            <li>Created 4+ design presentations and proposals a month for clients and account managers</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            </div>
+        {{-- Skills Section --}}
+        <section id="skills" class="skills">
+            @include('pages.main-home.skill')
         </section>
-        {{-- </section>End Resume Section --}}
+
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="#F2F3F8" fill-opacity="1" d="M0,160L48,160C96,160,192,160,288,176C384,192,480,224,576,240C672,256,768,256,864,245.3C960,235,1056,213,1152,213.3C1248,213,1344,235,1392,245.3L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+        </svg>
+
+
+
 
         {{-- Portfolio Section --}}
         {{-- <section id="portfolio" class="portfolio section-bg">

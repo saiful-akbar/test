@@ -8,6 +8,10 @@
 
 
 <div class="container">
+    <div class="section-title">
+        <h2>About</h2>
+    </div>
+
     <div class="row">
         <div class="col-lg-4" data-aos="fade-right">
             <img src="{{ asset('storage/'.$profile->profile_avatar) }}" class="img-fluid" alt="">

@@ -96,66 +96,128 @@ class DatabaseSeeder extends Seeder
         DB::table("skills")->insert([
             [
                 "user_id"       => $user->id,
-                "skill_name"    => strtoupper('html'),
+                "skill_name"    => strtoupper("html"),
                 "skill_publish" => true,
                 "created_at"    => now(),
                 "updated_at"    => now()
             ],
             [
                 "user_id"       => $user->id,
-                "skill_name"    => strtoupper('css'),
+                "skill_name"    => strtoupper("css"),
                 "skill_publish" => true,
                 "created_at"    => now(),
                 "updated_at"    => now()
             ],
             [
                 "user_id"       => $user->id,
-                "skill_name"    => strtoupper('javascript'),
+                "skill_name"    => strtoupper("javascript"),
                 "skill_publish" => true,
                 "created_at"    => now(),
                 "updated_at"    => now()
             ],
             [
                 "user_id"       => $user->id,
-                "skill_name"    => strtoupper('jquery'),
+                "skill_name"    => strtoupper("jquery"),
                 "skill_publish" => true,
                 "created_at"    => now(),
                 "updated_at"    => now()
             ],
             [
                 "user_id"       => $user->id,
-                "skill_name"    => strtoupper('react js'),
+                "skill_name"    => strtoupper("react js"),
                 "skill_publish" => true,
                 "created_at"    => now(),
                 "updated_at"    => now()
             ],
             [
                 "user_id"       => $user->id,
-                "skill_name"    => strtoupper('php'),
+                "skill_name"    => strtoupper("php"),
                 "skill_publish" => true,
                 "created_at"    => now(),
                 "updated_at"    => now()
             ],
             [
                 "user_id"       => $user->id,
-                "skill_name"    => strtoupper('laravel'),
+                "skill_name"    => strtoupper("laravel"),
                 "skill_publish" => true,
                 "created_at"    => now(),
                 "updated_at"    => now()
             ],
             [
                 "user_id"       => $user->id,
-                "skill_name"    => strtoupper('mysql'),
+                "skill_name"    => strtoupper("mysql"),
                 "skill_publish" => true,
                 "created_at"    => now(),
                 "updated_at"    => now()
             ],
             [
                 "user_id"       => $user->id,
-                "skill_name"    => strtoupper('git & github'),
+                "skill_name"    => strtoupper("git & github"),
                 "skill_publish" => true,
                 "created_at"    => now(),
                 "updated_at"    => now()
+            ],
+        ]);
+
+        // creat education data
+        DB::table("education")->insert([
+            [
+                "user_id"           => $user->id,
+                "education_level"   => "Elementary School",
+                "education_school"  => "SD N Kampung Bulak 1",
+                "education_from"    => 2002,
+                "education_to"      => 2008,
+                "education_desc"    => null,
+                "education_publish" => true,
+                "created_at"        => now(),
+                "updated_at"        => now()
+            ],
+            [
+                "user_id"           => $user->id,
+                "education_level"   => "Junior High School",
+                "education_school"  => "SMP Nusantara Plus",
+                "education_from"    => 2008,
+                "education_to"      => 2011,
+                "education_desc"    => null,
+                "education_publish" => true,
+                "created_at"        => now(),
+                "updated_at"        => now()
+            ],
+            [
+                "user_id"           => $user->id,
+                "education_level"   => "Senior High School",
+                "education_school"  => "SMK Sasmita Jaya",
+                "education_from"    => 2011,
+                "education_to"      => 2014,
+                "education_desc"    => null,
+                "education_publish" => true,
+                "created_at"        => now(),
+                "updated_at"        => now()
+            ],[
+                "user_id"           => $user->id,
+                "education_level"   => "Bachelor Degree",
+                "education_school"  => "Informatics Engineering at Pamulang University",
+                "education_from"    => 2014,
+                "education_to"      => 2018,
+                "education_desc"    => null,
+                "education_publish" => true,
+                "created_at"        => now(),
+                "updated_at"        => now()
+            ],
+        ]);
+
+        // create data work exoerience
+        DB::table("work_experiences")->insert([
+            [
+                "user_id"          => $user->id,
+                "we_field_of_work" => "Stock Control",
+                "we_company"       => "PT. Fellbuy Indonesia",
+                "we_from"          => 2016,
+                "we_to"            => 2021,
+                "we_desc"          => "Manage inventory data, from stock taking results to soft copy data for accounting & marketing needs",
+                "we_publish"       => true,
+                "created_at"       => now(),
+                "updated_at"       => now()
             ],
         ]);
     }

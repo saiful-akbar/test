@@ -126,9 +126,11 @@
 
 
 
+    {{-- JQuery --}}
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
     {{-- Core scripts --}}
     <script src="{{ asset('assets/dashboard-layouts/js/pace.js') }}"></script>
-    <script src="{{ asset('assets/dashboard-layouts/js/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('assets/dashboard-layouts/libs/popper/popper.js') }}"></script>
     <script src="{{ asset('assets/dashboard-layouts/js/bootstrap.js') }}"></script>
     <script src="{{ asset('assets/dashboard-layouts/js/sidenav.js') }}"></script>

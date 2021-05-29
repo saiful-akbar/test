@@ -5,8 +5,9 @@ namespace App\Models;
 use Carbon\Carbon;
 use App\Models\Sosmed;
 use App\Models\Profile;
+use App\Models\Education;
+use App\Models\WorkExperience;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -34,21 +35,6 @@ class User extends Authenticatable
     ];
 
     /**
-     * Relasi one to one dengan model Profile
-     */
-    public function profile()
-    {
-        return $this->hasOne(Profile::class, "user_id", "id");
-    }
-    /**
-     * Relasi one to one dengan model Sosmed
-     */
-    public function sosmed()
-    {
-        return $this->hasOne(Sosmed::class, "user_id", "id");
-    }
-
-    /**
      * Merubah format created_at
      */
     public function getCreatedAtAttribute()
@@ -62,5 +48,37 @@ class User extends Authenticatable
     public function getUpdatedAtAttribute()
     {
         return Carbon::parse($this->attributes['updated_at'])->format('d M Y H:i');
+    }
+
+    /**
+     * Relasi one to one dengan model Profile
+     */
+    public function profile()
+    {
+        return $this->hasOne(Profile::class, "user_id", "id");
+    }
+
+    /**
+     * Relasi one to one dengan model Sosmed
+     */
+    public function sosmed()
+    {
+        return $this->hasOne(Sosmed::class, "user_id", "id");
+    }
+
+    /**
+     * Relasi one to one dengan model Education
+     */
+    public function education()
+    {
+        return $this->hasOne(Education::class, "user_id", "id");
+    }
+
+    /**
+     * Relasi one to one dengan model WorkEcperience
+     */
+    public function workExperience()
+    {
+        return $this->hasOne(WorkExperience::class, "user_id", "id");
     }
 }

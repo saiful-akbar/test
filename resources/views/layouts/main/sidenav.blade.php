@@ -47,6 +47,11 @@ $sosmeds = Sosmed::all();
                     </a>
                 </li>
                 <li>
+                    <a href="#skills" class="scrollto">
+                        <i class='bx bx-code-block'></i> <span>Skills</span>
+                    </a>
+                </li>
+                <li>
                     <a href="#portfolio" class="scrollto">
                         <i class="bx bx-book-content"></i> <span>Portfolio</span>
                     </a>

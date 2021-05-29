@@ -36,11 +36,45 @@
         <li class="sidenav-divider mb-1"></li>
         <li class="sidenav-header small font-weight-semibold">Components</li>
 
-        {{-- Component => account & profile --}}
+        {{-- account & profile --}}
         <li class="sidenav-item {{ Request::is('app/profile*') ? 'active' : null }}">
             <a href="{{ route('dashboard.profile') }}" class="sidenav-link">
                 <i class="sidenav-icon feather icon-user"></i>
                 <div>Account & Profile</div>
+            </a>
+        </li>
+
+        {{-- resume --}}
+        <li class="sidenav-item {{ Request::is('app/resume*') ? 'active open' : null }}">
+            <a href="javascript:" class="sidenav-link sidenav-toggle">
+                <i class="sidenav-icon feather icon-box"></i>
+                <div>Resume</div>
+            </a>
+            <ul class="sidenav-menu">
+
+                {{-- resume => Education --}}
+                <li class="sidenav-item {{ Request::is('app/resume/education*') ? 'active' : null }}">
+                    <a href="{{ route('dashboard.education') }}" class="sidenav-link">
+                        <i class="sidenav-icon feather icon-book"></i>
+                        <div>Education</div>
+                    </a>
+                </li>
+
+                {{-- resume => work experience --}}
+                <li class="sidenav-item {{ Request::is('app/resume/work-experience*') ? 'active' : null }}">
+                    <a href="{{ route('dashboard.work-experience') }}" class="sidenav-link">
+                        <i class="sidenav-icon feather icon-briefcase"></i>
+                        <div>Work Experience</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        {{-- Skill --}}
+        <li class="sidenav-item {{ Request::is('app/skill*') ? 'active' : null }}">
+            <a href="{{ route('dashboard.skill') }}" class="sidenav-link">
+                <i class="sidenav-icon feather icon-codepen"></i>
+                <div>Skill</div>
             </a>
         </li>
     </ul>

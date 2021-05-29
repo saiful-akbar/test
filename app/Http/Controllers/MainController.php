@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Skill;
 use App\Models\Message;
 use App\Models\Profile;
+use App\Models\Education;
 use Illuminate\Http\Request;
+use App\Models\WorkExperience;
 
 class MainController extends Controller
 {
@@ -18,11 +20,10 @@ class MainController extends Controller
     {
         $profile = Profile::first();
         $skills = Skill::where("skill_publish", 1)->get();
+        $educations = Education::where('education_publish', 1)->orderBy('education_from', 'desc')->get();
+        $work_experiences = WorkExperience::where('we_publish', 1)->orderBy('we_from', 'desc')->get();
 
-        return view("pages.main-home.index", [
-            "profile" => $profile,
-            "skills"  => $skills
-        ]);
+        return view("pages.main-home.index", compact('profile', 'skills', 'educations', 'work_experiences'));
     }
 
     /**

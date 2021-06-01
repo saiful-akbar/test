@@ -7,25 +7,44 @@
 @endsection
 
 @section('content')
+
+    @if (session('success'))
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="alert alert-dark-success alert-dismissible fade show">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    {{ session('success') }}
+                </div>
+            </div>
+        </div>
+    @endif
+
+    @if (session('failed'))
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="alert alert-dark-danger alert-dismissible fade show">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    {{ session('failed') }}
+                </div>
+            </div>
+        </div>
+    @endif
+
     <div class="row mb-3">
         <div class="col-sm-12">
             <div class="card">
-                <h4 class="card-header">Educational List</h4>
+                <div class="card-header">
+                    <a class="btn btn-round btn-primary" href="{{ route('dashboard.education.create') }}">
+                        <i class="feather icon-plus-circle"></i>
+                        Add Education
+                    </a>
+                </div>
 
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-sm-12 mb-3">
-                            <a class="btn btn-round btn-primary" href="{{ route('dashboard.education.create') }}">
-                                <i class="feather icon-plus-circle"></i>
-                                Add Education
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="row">
                         <div class="col-sm-12">
                             <div class="table-responsive">
-                                <table class="table table-hover">
+                                <table class="table table-hover table-striped">
                                     <thead>
                                         <tr>
                                             <th>Level</th>
@@ -42,16 +61,12 @@
                                                 <td>{{ $education->education_school }}</td>
                                                 <td>{{ $education->education_from }} - {{ $education->education_to }}</td>
                                                 <td class="text-center">
-                                                    @if ($education->education_publish == 1)
-                                                        <i class="feather icon-check-circle text-success font-weight-bold"></i>
-                                                    @else
-                                                        <i class="feather feather icon-x-circle text-danger font-weight-bold"></i>
-                                                    @endif
+                                                    <i class="font-weight-bold feather {{ $education->education_publish == 1 ? 'icon-check-circle text-success' : 'icon-x-circle text-danger'}}"></i>
                                                 </td>
                                                 <td class="text-center">
                                                     <button class="btn btn-outline-info btn-sm btn-round mr-2" onclick="showDetail({{ $education->id }})">Detail</button>
-                                                    <button class="btn btn-outline-success btn-sm btn-round mr-2">Edit</button>
-                                                    <button class="btn btn-outline-danger btn-round btn-sm">Delete</button>
+                                                    <a class="btn btn-outline-success btn-sm btn-round mr-2" href={{ route('dashboard.education.edit', ['education' => $education->id]) }}>Edit</a>
+                                                    <button class="btn btn-outline-danger btn-round btn-sm" onclick="deleteEducation({{ $education->id }})">Delete</button>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -60,12 +75,48 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="d-flex justify-content-center pt-2">
+                                <nav class="overflow-x-auto">
+                                    @php
+                                        $page = $educations->currentPage(); // halaman yang aktif
+                                        $total_page = $educations->lastPage(); // jumlah halaman
+                                        $total_number = 2; // jumlah link selebum dan sesudah page aktif
+                                        $start_number = ($page > $total_number) ? $page - $total_number : 1; // untuk awal link number
+                                        $end_number = ($page < ($total_page - $total_number)) ? $page + $total_number : $total_page; // untuk akhir link number
+                                    @endphp
+
+                                    <ul class="pagination">
+                                        <li class="page-item {{ $educations->currentPage() <= 1 ? 'disabled' : null }}">
+                                            <a class="page-link" href="{{ $educations->url(1) }}">
+                                                <i class="feather icon-chevrons-left"></i>
+                                            </a>
+                                        </li>
+
+                                        @for ($i = $start_number; $i <= $end_number; $i++)
+                                            <li class="page-item {{ $educations->currentPage() == $i ? 'active disabled' : null }}">
+                                                <a class="page-link" href="{{ $educations->url($i) }}">{{ $i }}</a>
+                                            </li>
+                                        @endfor
+
+                                        <li class="page-item {{ $educations->currentPage() >= $educations->lastPage() ? 'disabled' : null }}">
+                                            <a class="page-link" href="{{ $educations->url($educations->lastPage()) }}">
+                                                <i class="feather icon-chevrons-right"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal Detail -->
+    {{-- Modal Detail --}}
     <div class="modal fade" id="modal-detail">
         <div class="modal-dialog modal-lg">
             <form class="modal-content">
@@ -134,12 +185,17 @@
             </form>
         </div>
     </div>
+
+    {{-- Form delete --}}
+    <form method="POST" id="form-delete-education">
+        @csrf @method('DELETE')
+    </form>
 @endsection
 
 @section('script')
     <script>
 
-        // FUungsi menampilkan detail education
+        // Fungsi menampilkan detail education
         function showDetail(id) {
             $.ajax({
                 type: "GET", // method
@@ -174,6 +230,32 @@
                 },
                 error: function(err) { // failed & tampilkan pesan error
                     toast("Error", err.status + ": " + err.statusText);
+                }
+            });
+        }
+
+        // Fungsi delete education
+        function deleteEducation(id) {
+            bootbox.confirm({
+                title: "Delete",
+                message: "Are you sure you want to permanently delete this educational data?",
+                buttons: {
+                    confirm: {
+                        label: 'Delete',
+                        className: 'btn-danger btn-round'
+                    },
+                    cancel: {
+                        label: 'Cancel',
+                        className: 'btn-outline-secondary btn-round'
+                    }
+                },
+                callback: result => {
+                    if (result) { // jika pesan dihapus
+                        const formDelete = $('#form-delete-education'); // form
+
+                        formDelete.attr('action', url(`/app/resume/education/${id}`)); // isikan url
+                        formDelete.submit(); // submit form
+                    }
                 }
             });
         }

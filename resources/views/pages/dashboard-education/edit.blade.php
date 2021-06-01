@@ -1,12 +1,12 @@
 @extends('layouts.dashboard.index')
 
 
-@section('title', 'Add Education')
+@section('title', 'Edit Education')
 
 
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route('dashboard.education') }}">Education</a></li>
-    <li class="breadcrumb-item active">Add Education</li>
+    <li class="breadcrumb-item active">Edit Education</li>
 @endsection
 
 
@@ -20,8 +20,8 @@
 @section('content')
     <div class="row mb-3">
         <div class="col-sm-12">
-            <form action="{{ route('dashboard.education.store') }}" method="POST">
-                @csrf @method('POST')
+            <form action="{{ route('dashboard.education.update', ["education" => $education->id]) }}" method="POST">
+                @csrf @method('PATCH')
 
                 <div class="card">
                     <div class="card-body">
@@ -38,12 +38,12 @@
                                         required
                                     >
                                         <option disabled selected></option>
-                                        <option value="Elementary School" {{ old('education_level') == "Elementary School" ? 'selected="selected"' : null }} >Elementary School</option>
-                                        <option value="Junior High School" {{ old('education_level') == "Junior High School" ? 'selected="selected"' : null }} >Junior High School</option>
-                                        <option value="Senior High School" {{ old('education_level') == "Senior High School" ? 'selected="selected"' : null }} >Senior High School</option>
-                                        <option value="Bachelor Degree" {{ old('education_level') == "Bachelor Degree" ? 'selected="selected"' : null }} >Bachelor Degree</option>
-                                        <option value="Masters" {{ old('education_level') == "Masters" ? 'selected="selected"' : null }} >Masters</option>
-                                        <option value="Doctor" {{ old('education_level') == "Doctor" ? 'selected="selected"' : null }} >Doctor</option>
+                                        <option value="Elementary School" {{ $education->education_level == "Elementary School" ? "selected" : null }} >Elementary School</option>
+                                        <option value="Junior High School" {{ $education->education_level == "Junior High School" ? "selected" : null }} >Junior High School</option>
+                                        <option value="Senior High School" {{ $education->education_level == "Senior High School" ? "selected" : null }} >Senior High School</option>
+                                        <option value="Bachelor Degree" {{ $education->education_level == "Bachelor Degree" ? "selected" : null }} >Bachelor Degree</option>
+                                        <option value="Masters" {{ $education->education_level == "Masters" ? "selected" : null }} >Masters</option>
+                                        <option value="Doctor" {{ $education->education_level == "Doctor" ? "selected" : null }} >Doctor</option>
                                     </select>
                                 </div>
 
@@ -62,7 +62,7 @@
                                     id="education_school"
                                     placeholder="Enter Department and school name..."
                                     class="form-control @error('education_school') is-invalid @enderror"
-                                    value="{{ old('education_school') }}"
+                                    value="{{ $education->education_school }}"
                                     required
                                 />
 
@@ -89,7 +89,7 @@
                                         <option selected></option>
 
                                         @for ($i = date('Y'); $i > date('Y') - 100; $i--)
-                                            <option value="{{ $i }}" {{ old('education_from') == $i ? 'selected="selected"' : null }} >{{ $i }}</option>
+                                            <option value="{{ $i }}" {{ $education->education_from == $i ? "selected" : null }} >{{ $i }}</option>
                                         @endfor
                                     </select>
                                 </div>
@@ -110,7 +110,7 @@
                                         data-allow-clear="true"
                                         style="width: 100%"
                                         class="form-control select2"
-                                        data-old="{{ old('education_to') }}"
+                                        data-value="{{ $education->education_to }}"
                                         required
                                     >
                                         <option selected></option>
@@ -128,7 +128,7 @@
                         <div class="form-row">
                             <div class="form-group col-sm-12">
                                 <label for="education_desc" class="form-label">Education Description</label>
-                                <textarea name="education_desc" id="education_desc" class="form-control @error('education_desc') is-invalid @enderror" rows="3" placeholder="Enter description...">{{ old('education_desc') }}</textarea>
+                                <textarea name="education_desc" id="education_desc" class="form-control @error('education_desc') is-invalid @enderror" rows="3" placeholder="Enter description...">{{ $education->education_desc }}</textarea>
 
                                 @error('education_desc')
                                     <small class="invalid-feedback">{{ $message }}</small>
@@ -141,7 +141,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-6 col-sm-12">
                                 <label class="switcher">
-                                    <input type="checkbox" name="education_publish" id="education_publish" class="switcher-input @error('education_publish') is-invalid @enderror" {{ old('education_school') == true ? "checked" : null }}>
+                                    <input type="checkbox" name="education_publish" id="education_publish" class="switcher-input @error('education_publish') is-invalid @enderror" {{ $education->education_publish == 1 ? "checked" : null }}>
                                     <span class="switcher-indicator">
                                         <span class="switcher-yes"></span>
                                         <span class="switcher-no"></span>
@@ -160,7 +160,7 @@
 
                     <div class="card-footer">
                         <button type="submit" class="btn btn-round btn-primary">
-                            <i class="feather icon-plus-circle"></i> Add Education
+                            <i class="feather icon-edit-1"></i> Update
                         </button>
 
                         <button type="reset" class="btn btn-round btn-outline-secondary ml-2">
@@ -182,15 +182,16 @@
             const fromSelected = $('#education_from').val();
 
             // Cek value
-            if (fromSelected.trim().toLowerCase() !== "") {
+            if (fromSelected.trim().toLowerCase() != "") {
                 const thisYear = new Date().getFullYear();
                 const diff = thisYear - fromSelected;
-                const old = $('#education_to').data('old');
+                const value = $('#education_to').data('value');
 
                 for (let i = fromSelected; i <= thisYear; i++) {
-                    $('#education_to').prepend(`<option value="${i}" ${old == i ? "selected" : ""}>${i}</option>`);
+                    $('#education_to').prepend(`<option value="${i}" ${value == i ? "selected" : ""}>${i}</option>`);
                 }
             }
+
 
             // Event saat form select education_form dipilih
             $('#education_from').change(function (e) {
@@ -205,9 +206,15 @@
                 const diff = thisYear - selected;
 
                 // cek value
-                $('#education_to').html(`<option selected></option>`);
-                for (let i = selected; i <= thisYear; i++) {
-                    $('#education_to').prepend(`<option value"${i}">${i}</option>`);
+                if (selected.trim() === "Select..." || selected === "") {
+                    $('#education_to').attr('disabled', true);
+                } else {
+                    $("#education_to").removeAttr('disabled');
+                    $('#education_to').html(`<option selected="selected"></option>`);
+
+                    for (let i = selected; i <= thisYear; i++) {
+                        $('#education_to').prepend(`<option value"${i}">${i}</option>`);
+                    }
                 }
             });
         });

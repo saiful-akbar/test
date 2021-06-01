@@ -1,18 +1,14 @@
-$(function () {
+$(document).ready(function () {
     // Tooltips
     $('[data-toggle="tooltip"]').tooltip();
 
     // Popovers
     $('[data-toggle="popover"]').popover();
 
-    /**
-     * Ladda
-     */
-
-    // Bind normal buttons
+    // Ladda Bind normal buttons
     Ladda.bind(".ladda-button", { timeout: 2000 });
 
-    // Bind progress buttons and simulate loading progress
+    // Ladda Bind progress buttons and simulate loading progress
     Ladda.bind(".ladda-progress", {
         callback: function (instance) {
             var progress = 0;
@@ -70,3 +66,16 @@ function toast(type = "Success", message = null) {
         showDuration: 300,
     });
 }
+
+/**
+ * Fungsi jam digital
+ */
+function time() {
+    setTimeout("time()", 1000);
+    document.getElementById("time").innerHTML = new Date().toLocaleString();
+}
+
+(function () {
+    // Pemasangan jam
+    window.setTimeout("time()", 1000);
+})();

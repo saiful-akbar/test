@@ -107,7 +107,7 @@
 
                             <a href="{{ route('dashboard.message.detail', ['message' => $message->id]) }}" class="message-subject flex-shrink-1 d-block text-dark {{ $message->message_read_status == 0 ? 'font-weight-bold' : null }}" >
                                 <div class="text-truncate" style="max-width: 500px;">
-                                    {{ $message->message_description }}
+                                    {{ $message->message_subject }} <span class="text-light"> - {{ $message->message_description }}</span>
                                 </div>
                             </a>
 
@@ -148,11 +148,11 @@
                     buttons: {
                         confirm: {
                             label: 'Delete',
-                            className: 'btn-danger'
+                            className: 'btn-danger btn-round'
                         },
                         cancel: {
                             label: 'Cancel',
-                            className: 'btn-outline-secondary'
+                            className: 'btn-outline-secondary btn-round'
                         }
                     },
                     callback: result => {

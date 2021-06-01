@@ -71,6 +71,10 @@ Route::middleware(["auth"])->group(function () {
                 Route::get("/", [EducationController::class, "index"])->name("dashboard.education");
                 Route::get("/create", [EducationController::class, "create"])->name("dashboard.education.create");
                 Route::get("/{education}", [EducationController::class, "detail"])->name("dashboard.education.detail");
+                Route::post("/", [EducationController::class, "store"])->name("dashboard.education.store");
+                Route::get("/{education}/edit", [EducationController::class, "edit"])->name("dashboard.education.edit");
+                Route::patch("/{education}", [EducationController::class, "update"])->name("dashboard.education.update");
+                Route::delete("/{education}", [EducationController::class, "delete"])->name("dashboard.education.delete");
             });
 
             /**

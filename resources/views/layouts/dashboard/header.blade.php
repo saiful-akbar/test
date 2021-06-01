@@ -14,7 +14,7 @@ $user = User::find(Auth::user()->id)->profile()->first();
         <span class="app-brand-logo demo">
             <img src="{{ asset('assets/images/logo/logo-circle.png') }}" alt="Brand Logo" class="img-fluid" width="35">
         </span>
-        <span class="app-brand-text demo font-weight-normal ml-2">Bhumlu</span>
+        <span class="app-brand-text demo font-weight-bold ml-2">Dashboard</span>
     </a>
 
     {{-- Sidenav toggle (see assets/css/demo/demo.css) --}}
@@ -34,14 +34,7 @@ $user = User::find(Auth::user()->id)->profile()->first();
         <hr class="d-lg-none w-100 my-2">
 
         {{-- Search --}}
-        <div class="navbar-nav align-items-lg-center">
-            <label class="nav-item navbar-text navbar-search-box p-0 active">
-                <i class="feather icon-search navbar-icon align-middle"></i>
-                <span class="navbar-search-input pl-2">
-                    <input type="text" class="form-control navbar-text mx-2" placeholder="Search...">
-                </span>
-            </label>
-        </div>
+        <h6 class="navbar-nav align-items-lg-center" id="time"></h6>
 
         <div class="navbar-nav align-items-lg-center ml-auto">
 

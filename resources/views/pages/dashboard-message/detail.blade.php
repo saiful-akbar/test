@@ -81,11 +81,11 @@
                     buttons: {
                         confirm: {
                             label: 'Delete',
-                            className: 'btn-danger'
+                            className: 'btn-danger btn-round'
                         },
                         cancel: {
                             label: 'Cancel',
-                            className: 'btn-outline-secondary'
+                            className: 'btn-outline-secondary btn-round'
                         }
                     },
                     callback: result => {

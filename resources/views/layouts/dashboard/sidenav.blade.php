@@ -6,7 +6,7 @@
         <span class="app-brand-logo demo">
             <img src="{{ asset('assets/images/logo/logo-circle.png') }}" alt="Brand Logo" class="img-fluid" width="40">
         </span>
-        <a href="index.html" class="app-brand-text demo sidenav-text font-weight-normal ml-2">Dashboard</a>
+        <a href="{{ route('dashboard.home') }}" class="app-brand-text demo sidenav-text font-weight-bold ml-2">Dashboard</a>
         <a href="javascript:" class="layout-sidenav-toggle sidenav-link text-large ml-auto">
             <i class="ion ion-md-menu align-middle"></i>
         </a>

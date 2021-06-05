@@ -37,6 +37,7 @@
     <link rel="stylesheet" href="{{ asset('assets/dashboard-layouts/libs/select2/select2.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/dashboard-layouts/libs/ladda/ladda.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/dashboard-layouts/libs/toastr/toastr.css') }}">
+    @yield('css.libs')
 
     {{-- Main CSS --}}
     <link rel="stylesheet" href="{{ asset('assets/dashboard-layouts/css/main.css') }}">
@@ -53,7 +54,6 @@
         <div class="bg-primary"></div>
     </div>
     {{-- [ Preloader ] Ebd --}}
-
 
 
     {{-- [ layout guest] --}}
@@ -151,6 +151,7 @@
     <script src="{{ asset('assets/dashboard-layouts/libs/ladda/ladda.js') }}"></script>
     <script src="{{ asset('assets/dashboard-layouts/libs/toastr/toastr.js') }}"></script>
     <script src="{{ asset('assets/dashboard-layouts/libs/bootbox/bootbox.js') }}"></script>
+    @yield('script.libs')
 
     {{-- Demo  --}}
     <script src="{{ asset('assets/dashboard-layouts/js/demo.js') }}"></script>
@@ -158,6 +159,22 @@
 
     {{-- Main script --}}
     <script src="{{ asset('assets/dashboard-layouts/js/main.js') }}"></script>
+
+    @if (session('success'))
+        <script>
+            $(document).ready(function () {
+                toast("Success", "{{ session('success') }}");
+            });
+        </script>
+    @endif
+
+    @if (session('error'))
+        <script>
+            $(document).ready(function () {
+                toast("Error", "{{ session('error') }}");
+            });
+        </script>
+    @endif
 
     {{-- Pages script --}}
     @yield('script')

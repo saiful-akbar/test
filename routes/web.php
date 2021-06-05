@@ -9,6 +9,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\WorkExperienceController;
+use App\Models\WorkExperience;
 
 /**
  * Route guest
@@ -82,6 +83,9 @@ Route::middleware(["auth"])->group(function () {
              */
             Route::prefix("work-experience")->group(function () {
                 Route::get("/", [WorkExperienceController::class, "index"])->name("dashboard.work-experience");
+                Route::get("/create", [WorkExperienceController::class, "create"])->name("dashboard.work-experience.create");
+                Route::get('/{id}/edit', [WorkExperienceController::class, 'edit'])->name('dashboard.work-experience.edit');
+                Route::post("/", [WorkExperienceController::class, "store"])->name('dashboard.work-experience.store');
             });
         });
 
@@ -90,6 +94,21 @@ Route::middleware(["auth"])->group(function () {
          */
         Route::prefix('skill')->group(function () {
             Route::get('/', [SkillController::class, 'index'])->name('dashboard.skill');
+        });
+    });
+
+
+    /**
+     * Route api
+     */
+    Route::prefix('api/app')->group(function () {
+
+        /**
+         * Route group api work experience
+         */
+        Route::prefix('work-experience')->group(function () {
+            Route::get('/', [WorkExperienceController::class, 'getAll'])->name('api.work-experience');
+            Route::get('/{id}', [WorkExperienceController::class, 'detail'])->name('api.work-experience.detail');
         });
     });
 });

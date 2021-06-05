@@ -5,25 +5,6 @@ $(document).ready(function () {
     // Popovers
     $('[data-toggle="popover"]').popover();
 
-    // Ladda Bind normal buttons
-    Ladda.bind(".ladda-button", { timeout: 2000 });
-
-    // Ladda Bind progress buttons and simulate loading progress
-    Ladda.bind(".ladda-progress", {
-        callback: function (instance) {
-            var progress = 0;
-            var interval = setInterval(function () {
-                progress = Math.min(progress + Math.random() * 0.1, 1);
-                instance.setProgress(progress);
-
-                if (progress === 1) {
-                    instance.stop();
-                    clearInterval(interval);
-                }
-            }, 200);
-        },
-    });
-
     // Select2
     $(".select2").each(function () {
         $(this)
@@ -33,6 +14,10 @@ $(document).ready(function () {
                 dropdownParent: $(this).parent(),
             });
     });
+
+    // Hide loading
+    $(".loading").hide();
+    $(".content-show").show();
 });
 
 /**
@@ -58,7 +43,7 @@ function url(path = "/") {
  */
 function toast(type = "Success", message = null) {
     toastr[type.trim().toLowerCase()](message.trim(), type.trim(), {
-        positionClass: "toast-bottom-right",
+        positionClass: "toast-top-right",
         closeButton: true,
         progressBar: true,
         timeOut: 10000,

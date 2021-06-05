@@ -162,10 +162,6 @@
                         <button type="submit" class="btn btn-round btn-primary">
                             <i class="feather icon-edit-1"></i> Update
                         </button>
-
-                        <button type="reset" class="btn btn-round btn-outline-secondary ml-2">
-                            <i class="feather icon-x-circle"></i> Reset
-                        </button>
                     </div>
                 </div>
             </form>

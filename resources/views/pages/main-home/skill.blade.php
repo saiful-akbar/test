@@ -10,7 +10,7 @@
                     <div class="progress">
                         <span class="skill">{{ $skill->skill_name }}</span>
                         <div class="progress-bar-wrap">
-                            <div class="progress-bar progress-bar-striped bg-primary" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                 @endif
@@ -23,7 +23,7 @@
                     <div class="progress">
                         <span class="skill">{{ $skill->skill_name }}</span>
                         <div class="progress-bar-wrap">
-                            <div class="progress-bar progress-bar-striped bg-primary" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                 @endif

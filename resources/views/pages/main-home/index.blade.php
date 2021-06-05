@@ -11,27 +11,20 @@
             @include('pages.main-home.about')
         </section>
 
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-            <path fill="#F3F4F5" fill-opacity="1" d="M0,128L48,128C96,128,192,128,288,149.3C384,171,480,213,576,192C672,171,768,85,864,85.3C960,85,1056,171,1152,197.3C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-        </svg>
-
-        {{-- Resume Section --}}
-        <section id="resume" class="resume section-bg">
-            @include('pages.main-home.resume')
-        </section>
-
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-            <path fill="#F3F4F5" fill-opacity="1" d="M0,224L48,202.7C96,181,192,139,288,144C384,149,480,203,576,208C672,213,768,171,864,181.3C960,192,1056,256,1152,256C1248,256,1344,192,1392,160L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
-        </svg>
-
         {{-- Skills Section --}}
-        <section id="skills" class="skills">
+        <section id="skills" class="skills section-bg">
             @include('pages.main-home.skill')
         </section>
 
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-            <path fill="#F2F3F8" fill-opacity="1" d="M0,160L48,160C96,160,192,160,288,176C384,192,480,224,576,240C672,256,768,256,864,245.3C960,235,1056,213,1152,213.3C1248,213,1344,235,1392,245.3L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-        </svg>
+        {{-- Resume Section --}}
+        <section id="resume" class="resume">
+            @include('pages.main-home.resume')
+        </section>
+
+        {{-- Contact Section --}}
+        <section id="contact" class="contact section-bg">
+            @include('pages.main-home.contact')
+        </section>
 
 
 
@@ -199,10 +192,5 @@
             </div>
         </section> --}}
         {{-- </section>End Services Section --}}
-
-        {{-- Contact Section --}}
-        <section id="contact" class="contact section-bg">
-            @include('pages.main-home.contact')
-        </section>
     </main>
 @endsection

@@ -84,8 +84,9 @@ Route::middleware(["auth"])->group(function () {
             Route::prefix("work-experience")->group(function () {
                 Route::get("/", [WorkExperienceController::class, "index"])->name("dashboard.work-experience");
                 Route::get("/create", [WorkExperienceController::class, "create"])->name("dashboard.work-experience.create");
-                Route::get('/{id}/edit', [WorkExperienceController::class, 'edit'])->name('dashboard.work-experience.edit');
                 Route::post("/", [WorkExperienceController::class, "store"])->name('dashboard.work-experience.store');
+                Route::get('/{id}/edit', [WorkExperienceController::class, 'edit'])->name('dashboard.work-experience.edit');
+                Route::patch("/{id}", [WorkExperienceController::class, "update"])->name('dashboard.work-experience.update');
             });
         });
 
@@ -109,6 +110,7 @@ Route::middleware(["auth"])->group(function () {
         Route::prefix('work-experience')->group(function () {
             Route::get('/', [WorkExperienceController::class, 'getAll'])->name('api.work-experience');
             Route::get('/{id}', [WorkExperienceController::class, 'detail'])->name('api.work-experience.detail');
+            Route::delete('/{id}', [WorkExperienceController::class, 'delete'])->name('api.work-experience.delete');
         });
     });
 });

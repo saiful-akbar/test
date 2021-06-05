@@ -143,12 +143,17 @@
                     title: 'Period'
                 },
                 {
-                    data: 'publish',
+                    data: 'we_publish',
                     title: 'Publish',
+                    className: 'text-center',
+                    orderable: false,
+                    searchable: false,
+                    render: function ( data, type, row, meta ) {
+                        return `<i class="font-weight-bold feather ${data == 1 ? 'icon-check-circle text-success' : 'icon-x-circle text-danger'}"></i>`;
+                    }
                 },
                 {
                     data: 'action',
-                    name: 'action',
                     title: 'Action',
                     className: 'text-center',
                     orderable: false,
@@ -184,6 +189,43 @@
                 },
                 error: function(err) {
                     toast("Error", err.status + ": " + err.statusText);
+                }
+            });
+        }
+
+        // Fungsi delete
+        function destroy(id) {
+            bootbox.confirm({
+                title: "Delete",
+                message: "Are you sure you want to permanently delete this data?",
+                buttons: {
+                    confirm: {
+                        label: 'Delete',
+                        className: 'btn-danger btn-round'
+                    },
+                    cancel: {
+                        label: 'Cancel',
+                        className: 'btn-outline-secondary btn-round'
+                    }
+                },
+                callback: result => {
+                    if (result) { // jika pesan dihapus
+                        const token = $('meta[name=csrf-token]').attr('content');
+
+                        $.ajax({
+                            type: "DELETE",
+                            url: url(`api/app/work-experience/${id}`),
+                            data: { _token: token },
+                            dataType: "json",
+                            success: function (res) {
+                                toast("Success", res.message);
+                                reloadTable();
+                            },
+                            error: function(err) {
+                                toast("Error", err.status + " : " + err.responseJSON.message);
+                            }
+                        });
+                    }
                 }
             });
         }

@@ -35,9 +35,6 @@ class WorkExperienceController extends Controller
             ->addColumn('period', function ($we) {
                 return "{$we->we_from} - {$we->we_to}";
             })
-            ->addColumn('publish', function ($we) {
-                return $we->we_publish == 1 ? 'Yes' : 'No';
-            })
             ->editColumn('id', '{{$id}}')
             ->removeColumn('password')
             ->make(true);
@@ -109,5 +106,53 @@ class WorkExperienceController extends Controller
     {
         $we = WorkExperience::findOrfail($id);
         return view('pages.dashboard-work-experience.edit', compact('we'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $max_year = date("Y");
+        $min_year = $max_year - 100;
+
+        // Validasi
+        $request->validate([
+            "field_of_work" => "required|string|max:100",
+            "company"       => "required|string|max:100",
+            "from_period"   => "required|numeric|max:{$max_year}|min:{$min_year}",
+            "to_period"     => "required|numeric|min:{$request->education_from}|max:{$max_year}",
+            "description"   => "nullable|string|max:400",
+        ]);
+
+        // Cek apakah pendidikan di publis atau tidak
+        $publish = (isset($request->publish) && $request->publish == "on") ? true : false;
+
+        // simpan ke database
+        WorkExperience::where("id", $id)->update([
+            "user_id" => Auth::user()->id,
+            "we_field_of_work" => htmlspecialchars(ucwords($request->field_of_work)),
+            "we_company" => htmlspecialchars(ucwords($request->company)),
+            "we_from" => htmlspecialchars($request->from_period),
+            "we_to" => htmlspecialchars($request->to_period),
+            "we_desc" => htmlspecialchars($request->description),
+            "we_publish" => $publish
+        ]);
+
+        return redirect()->route("dashboard.work-experience")->with('success', 'Work experience data updated successfully');
+    }
+
+    /**
+     * Method delete data work experinece
+     *
+     * @param mixed $id
+     */
+    public function delete($id)
+    {
+        $data = WorkExperience::findOrfail($id);
+        $delete = WorkExperience::destroy($data->id);
+
+        if ($delete >= 1) { // Cek apakah data berhasil di hapus atau tidak
+            return response()->json([
+                "message" => "Work experience data deleted successfully"
+            ], 200);
+        }
     }
 }

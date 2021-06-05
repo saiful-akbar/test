@@ -53,7 +53,7 @@ $user = User::find(Auth::user()->id)->profile()->first();
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a href="javascript:" class="dropdown-item">
+                    <a href="{{ route('dashboard.profile') }}" class="dropdown-item">
                         <i class="feather icon-user text-muted"></i>&nbsp; My profile
                     </a>
                     <a href="{{ route('dashboard.message') }}" class="dropdown-item">

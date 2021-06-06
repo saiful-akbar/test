@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Skill;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Datatables;
+use Illuminate\Support\Facades\Auth;
 
 class SkillController extends Controller
 {
@@ -14,17 +16,23 @@ class SkillController extends Controller
      */
     public function index()
     {
-        echo 'Skill Page';
+        return view('pages.dashboard-skill.index');
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Method untuk mengambil semua data skill dengan ajax
      */
-    public function create()
+    public function getData()
     {
-        //
+        $skills = Skill::all();
+
+        return Datatables::of($skills)
+            ->addColumn('action', function ($skill) {
+                return "
+                    <button onclick='handleOpenModalForm(`edit`, {$skill->id})' class='btn btn-sm btn-outline-success btn-round mr-2'>Edit</button>
+                    <button onclick='destroy({$skill->id})' class='btn btn-sm btn-outline-danger btn-round'>Delete</button>
+                ";
+            })->make(true);
     }
 
     /**
@@ -35,18 +43,24 @@ class SkillController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        // Validasi
+        $request->validate([
+            "skill_name" => "required|string|max:100",
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Skill  $skill
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Skill $skill)
-    {
-        //
+        // Cek publist
+        $publish = (isset($request->publish) && $request->publish == "on") ? true : false;
+
+        // Tambahkan ke dataabse
+        Skill::create([
+            "user_id" => Auth::user()->id,
+            "skill_name" => htmlspecialchars(strtoupper($request->skill_name)),
+            "skill_publish" => $publish
+        ]);
+
+        return response()->json([
+            "message" => "New skill added successfully"
+        ], 200);
     }
 
     /**
@@ -57,7 +71,9 @@ class SkillController extends Controller
      */
     public function edit(Skill $skill)
     {
-        //
+        return response()->json([
+            "data" => $skill
+        ]);
     }
 
     /**
@@ -69,7 +85,29 @@ class SkillController extends Controller
      */
     public function update(Request $request, Skill $skill)
     {
-        //
+        /// Validasi
+        $request->validate([
+            "skill_name" => "required|string|max:100",
+        ]);
+
+        // cek apakan nama skill sudah digunakan oleh field yang sudah ada tau belum
+        if (htmlspecialchars(strtoupper($request->skill_name)) != strtoupper($skill->skill_name)) {
+            $request->validate(["skill_name" => 'unique:skills,skill_name']);
+        }
+
+        // Cek publist
+        $publish = (isset($request->publish) && $request->publish == "on") ? true : false;
+
+        // Tambahkan ke dataabse
+        Skill::where('id', $skill->id)->update([
+            "user_id" => Auth::user()->id,
+            "skill_name" => htmlspecialchars(strtoupper($request->skill_name)),
+            "skill_publish" => $publish
+        ]);
+
+        return response()->json([
+            "message" => "Skill updated successfully"
+        ], 200);
     }
 
     /**
@@ -80,6 +118,12 @@ class SkillController extends Controller
      */
     public function destroy(Skill $skill)
     {
-        //
+        $delete = Skill::destroy($skill->id);
+
+        if ($delete >= 1) {
+            return response()->json([
+                "message" => "<strong>{$skill->skill_name}</strong> skill deleted successfuly"
+            ], 200);
+        }
     }
 }

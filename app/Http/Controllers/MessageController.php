@@ -37,10 +37,10 @@ class MessageController extends Controller
         $delete = Message::destroy($message->id);
 
         if($delete >= 1) {
-            return redirect()->route('dashboard.message')->with('deleted', 'Message deleted successfully');
+            return redirect()->route('dashboard.message')->with('success', 'Message deleted successfully');
         }
 
-        return redirect()->route('dashboard.message')->with('failed', 'Message failed to delete');
+        return redirect()->route('dashboard.message')->with('error', 'Message failed to delete');
     }
 
     /**

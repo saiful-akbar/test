@@ -1,9 +1,6 @@
 $(document).ready(function () {
-    // Tooltips
-    $('[data-toggle="tooltip"]').tooltip();
-
-    // Popovers
-    $('[data-toggle="popover"]').popover();
+    $('[data-toggle="tooltip"]').tooltip(); // Tooltips
+    $('[data-toggle="popover"]').popover(); // Popovers
 
     // Select2
     $(".select2").each(function () {

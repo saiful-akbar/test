@@ -19,7 +19,7 @@ class MainController extends Controller
     public function index()
     {
         $profile = Profile::first();
-        $skills = Skill::where("skill_publish", 1)->get();
+        $skills = Skill::where("skill_publish", 1)->orderBy('skill_name', 'asc')->get();
         $educations = Education::where('education_publish', 1)->orderBy('education_from', 'desc')->get();
         $work_experiences = WorkExperience::where('we_publish', 1)->orderBy('we_from', 'desc')->get();
 

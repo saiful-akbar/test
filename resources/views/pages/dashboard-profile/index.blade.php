@@ -19,19 +19,8 @@
                     <h4 class="card-header">Account</h4>
 
                     <div class="card-body">
-                        @if (session('account-updated'))
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="alert alert-dark-success alert-dismissible fade show">
-                                        <button type="button" class="close" data-dismiss="alert">×</button>
-                                        {{ session('account-updated') }}
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
-
                         <div class="form-row">
-                            <div class="form-group col-md-6 @error('username') position-relative mb-5 @enderror">
+                            <div class="form-group col-md-6">
                                 <label for="username" class="form-label">Username *</label>
                                 <input
                                     type="text"
@@ -44,12 +33,12 @@
                                 />
 
                                 @error('username')
-                                    <div class="invalid-tooltip">{{ $message }}</div>
+                                    <small class="invalid-feedback">{{ $message }}</small>
                                 @enderror
 
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="form-group col-md-6 @error('password') position-relative mb-5 @enderror">
+                            <div class="form-group col-md-6">
                                 <label for="password" class="form-label">Password</label>
                                 <input
                                     type="password"
@@ -64,7 +53,7 @@
                                 </small>
 
                                 @error('password')
-                                    <div class="invalid-tooltip">{{ $message }}</div>
+                                    <small class="invalid-feedback">{{ $message }}</small>
                                 @enderror
                                 <div class="clearfix"></div>
                             </div>
@@ -96,18 +85,6 @@
                     <h4 class="card-header">Profile</h4>
 
                     <div class="card-body">
-
-                        @if (session('profile-updated'))
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="alert alert-dark-success alert-dismissible fade show">
-                                        <button type="button" class="close" data-dismiss="alert">×</button>
-                                        {{ session('profile-updated') }}
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
-
                         <div class="row mb-5">
                             <div class="col-sm-12">
                                 <div class="form-group">
@@ -142,7 +119,7 @@
                         <div class="form-row">
 
                             {{-- Form nama awal --}}
-                            <div class="form-group col-md-4 @error('first_name') position-relaive mb-5 @enderror">
+                            <div class="form-group col-md-4">
                                 <label for="first-name" class="form-label">First Name *</label>
                                 <input
                                     type="text"
@@ -155,7 +132,7 @@
                                 />
 
                                 @error('first_name')
-                                    <div class="invalid-tooltip">{{ $message }}</div>
+                                    <small class="invalid-feedback">{{ $message }}</small>
                                 @enderror
 
                                 <div class="clearfix"></div>
@@ -163,7 +140,7 @@
                             {{-- Akhir form nama awal --}}
 
                             {{-- form nama akhir --}}
-                            <div class="form-group col-md-4 @error('first_name') position-relaive mb-5 @enderror">
+                            <div class="form-group col-md-4">
                                 <label for="last-name" class="form-label">Last Name *</label>
                                 <input
                                     type="text"
@@ -176,7 +153,7 @@
                                 />
 
                                 @error('last_name')
-                                    <div class="invalid-tooltip">{{ $message }}</div>
+                                    <small class="invalid-feedback">{{ $message }}</small>
                                 @enderror
 
                                 <div class="clearfix"></div>
@@ -184,7 +161,7 @@
                             {{-- akhir form nama akhir --}}
 
                             {{-- form email --}}
-                            <div class="form-group col-md-4 @error('email') position-relaive mb-5 @enderror">
+                            <div class="form-group col-md-4">
                                 <label for="email" class="form-label">Email *</label>
                                 <input
                                     type="text"
@@ -197,7 +174,7 @@
                                 />
 
                                 @error('email')
-                                    <div class="invalid-tooltip">{{ $message }}</div>
+                                    <small class="invalid-feedback">{{ $message }}</small>
                                 @enderror
 
                                 <div class="clearfix"></div>
@@ -209,55 +186,60 @@
                         <div class="form-row">
 
                             {{-- Form tanggal lahir --}}
-                            <div class="form-group col-md-4 @error('date_of_birth') position-relative mb-5 @enderror">
+                            <div class="form-group col-md-4">
                                 <label for="date-of-birth" class="form-label">Date Of Birth *</label>
-                                <select name="date_of_birth" id="date-of-birth" class="form-control select2 @error('date_of_birth') is-invalid @enderror" required>
-                                    @for ($i = 1; $i <= 31; $i++)
-                                        <option value="{{ $i }}" @if ($i == $profile->profile_date_of_birth) selected @endif>{{ $i }}</option>
-                                    @endfor
-                                </select>
+                                <div class="@error('date_of_birth') is-invalid @enderror">
+                                    <select name="date_of_birth" id="date-of-birth" class="form-control select2" required>
+                                        @for ($i = 1; $i <= 31; $i++)
+                                            <option value="{{ $i }}" @if ($i == $profile->profile_date_of_birth) selected @endif>{{ $i }}</option>
+                                        @endfor
+                                    </select>
 
-                                @error('date_of_birth')<div class="invalid-tooltip">{{ $message }}</div>@enderror
-
+                                    @error('date_of_birth')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
                                 <div class="clearfix"></div>
                             </div>
                             {{-- akhir form tanggal lahir --}}
 
                             {{-- form bulan lahir --}}
-                            <div class="form-group col-md-4 @error('month_of_birth') position-relative mb-5 @enderror">
+                            <div class="form-group col-md-4">
                                 <label for="month-of-birth" class="form-label">Month Of Birth *</label>
-                                <select name="month_of_birth" id="month-of-birth" class="form-control select2 @error('month_of_birth') is-invalid @enderror" required>
-                                    <option value="January" @if ($profile->profile_month_of_birth == 'January') selected @endif>January</option>
-                                    <option value="February" @if ($profile->profile_month_of_birth == 'February') selected @endif>February</option>
-                                    <option value="March" @if ($profile->profile_month_of_birth == 'March') selected @endif>March</option>
-                                    <option value="April" @if ($profile->profile_month_of_birth == 'April') selected @endif>April</option>
-                                    <option value="May" @if ($profile->profile_month_of_birth == 'May') selected @endif>May</option>
-                                    <option value="Juny" @if ($profile->profile_month_of_birth == 'Juny') selected @endif>Juny</option>
-                                    <option value="July" @if ($profile->profile_month_of_birth == 'July') selected @endif>July</option>
-                                    <option value="August" @if ($profile->profile_month_of_birth == 'August') selected @endif>August</option>
-                                    <option value="September" @if ($profile->profile_month_of_birth == 'September') selected @endif>September</option>
-                                    <option value="October" @if ($profile->profile_month_of_birth == 'October') selected @endif>October</option>
-                                    <option value="November" @if ($profile->profile_month_of_birth == 'November') selected @endif>November</option>
-                                    <option value="December" @if ($profile->profile_month_of_birth == 'December') selected @endif>December</option>
-                                </select>
+                                <div class="@error('month_of_birth') is-invalid @enderror">
+                                    <select name="month_of_birth" id="month-of-birth" class="form-control select2" required>
+                                        <option value="January" @if ($profile->profile_month_of_birth == 'January') selected @endif>January</option>
+                                        <option value="February" @if ($profile->profile_month_of_birth == 'February') selected @endif>February</option>
+                                        <option value="March" @if ($profile->profile_month_of_birth == 'March') selected @endif>March</option>
+                                        <option value="April" @if ($profile->profile_month_of_birth == 'April') selected @endif>April</option>
+                                        <option value="May" @if ($profile->profile_month_of_birth == 'May') selected @endif>May</option>
+                                        <option value="Juny" @if ($profile->profile_month_of_birth == 'Juny') selected @endif>Juny</option>
+                                        <option value="July" @if ($profile->profile_month_of_birth == 'July') selected @endif>July</option>
+                                        <option value="August" @if ($profile->profile_month_of_birth == 'August') selected @endif>August</option>
+                                        <option value="September" @if ($profile->profile_month_of_birth == 'September') selected @endif>September</option>
+                                        <option value="October" @if ($profile->profile_month_of_birth == 'October') selected @endif>October</option>
+                                        <option value="November" @if ($profile->profile_month_of_birth == 'November') selected @endif>November</option>
+                                        <option value="December" @if ($profile->profile_month_of_birth == 'December') selected @endif>December</option>
+                                    </select>
 
-                                @error('month_of_birth')<div class="invalid-tooltip">{{ $message }}</div>@enderror
-
+                                    @error('month_of_birth')<small class="text-denger">{{ $message }}</small>@enderror
+                                </div>
                                 <div class="clearfix"></div>
                             </div>
                             {{-- akhir form bulan lahir --}}
 
                             {{-- form tahun lahir --}}
-                            <div class="form-group col-md-4 @error('year_of_birth') position-relative mb-5 @enderror">
+                            <div class="form-group col-md-4">
                                 <label for="year-of-birth" class="form-label">Year Of Birth *</label>
-                                <select name="year_of_birth" id="year-of-birth" class="form-control select2 @error('year_of_birth') is-invalid @enderror" required>
-                                    @for ($i = date('Y'); $i >= date('Y') - 100; $i--)
-                                        <option value="{{ $i }}" @if ($i == $profile->profile_year_of_birth) selected @endif>{{ $i }}</option>
-                                    @endfor
-                                </select>
+                                <div class="@error('year_of_birth') is-invalid @enderror">
+                                    <select name="year_of_birth" id="year-of-birth" class="form-control select2 @error('year_of_birth') is-invalid @enderror" required>
+                                        @for ($i = date('Y'); $i >= date('Y') - 100; $i--)
+                                            <option value="{{ $i }}" @if ($i == $profile->profile_year_of_birth) selected @endif>{{ $i }}</option>
+                                        @endfor
+                                    </select>
 
-                                @error('year_of_birth')<div class="invalid-tooltip">{{ $message }}</div>@enderror
-
+                                    @error('year_of_birth')<small class="text-danger">{{ $message }}</small>@enderror
+                                </div>
                                 <div class="clearfix"></div>
                             </div>
                             {{-- akhir form tahun lahir --}}
@@ -267,7 +249,7 @@
                         <div class="form-row">
 
                             {{-- form nomer telepon --}}
-                            <div class="form-group col-md-4 @error('phone') position-relaive mb-5 @enderror">
+                            <div class="form-group col-md-4">
                                 <label for="phone" class="form-label">Phone *</label>
                                 <input
                                     type="text"
@@ -280,7 +262,7 @@
                                 />
 
                                 @error('phone')
-                                    <div class="invalid-tooltip">{{ $message }}</div>
+                                    <small class="invalid-feedback">{{ $message }}</small>
                                 @enderror
 
                                 <div class="clearfix"></div>
@@ -288,7 +270,7 @@
                             {{-- akhir form nomer telepon --}}
 
                             {{-- form email --}}
-                            <div class="form-group col-md-4 @error('website') position-relaive mb-5 @enderror">
+                            <div class="form-group col-md-4">
                                 <label for="website" class="form-label">Website *</label>
                                 <input
                                     type="text"
@@ -301,7 +283,7 @@
                                 />
 
                                 @error('website')
-                                    <div class="invalid-tooltip">{{ $message }}</div>
+                                    <small class="invalid-feedback">{{ $message }}</small>
                                 @enderror
 
                                 <div class="clearfix"></div>
@@ -313,7 +295,7 @@
                         <div class="form-row">
 
                             {{-- form kota --}}
-                            <div class="form-group col-md-4 @error('city') position-relaive mb-5 @enderror">
+                            <div class="form-group col-md-4">
                                 <label for="city" class="form-label">City *</label>
                                 <input
                                     type="text"
@@ -326,7 +308,7 @@
                                 />
 
                                 @error('city')
-                                    <div class="invalid-tooltip">{{ $message }}</div>
+                                    <small class="invalid-feedback">{{ $message }}</small>
                                 @enderror
 
                                 <div class="clearfix"></div>
@@ -334,7 +316,7 @@
                             {{-- akhir form kota --}}
 
                             {{-- Form negara --}}
-                            <div class="form-group col-md-4 @error('country') position-relaive mb-5 @enderror">
+                            <div class="form-group col-md-4">
                                 <label for="country" class="form-label">country *</label>
                                 <input
                                     type="text"
@@ -347,7 +329,7 @@
                                 />
 
                                 @error('country')
-                                    <div class="invalid-tooltip">{{ $message }}</div>
+                                    <small class="invalid-feedback">{{ $message }}</small>
                                 @enderror
 
                                 <div class="clearfix"></div>
@@ -371,7 +353,7 @@
                                 >{{ $profile->profile_street }}</textarea>
 
                                 @error('street')
-                                    <div class="invalid-tooltip">{{ $message }}</div>
+                                    <small class="invalid-feedback">{{ $message }}</small>
                                 @enderror
 
                                 <div class="clearfix"></div>

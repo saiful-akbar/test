@@ -7,14 +7,6 @@
 @endsection
 
 @section('content')
-
-    @if (session('login-success'))
-        <div class="alert alert-dark-success alert-dismissible fade show">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            {{ session('login-success') }}
-        </div>
-    @endif
-
     <div class="row mb-3">
         <div class="col-sm-12">
             <div class="card">

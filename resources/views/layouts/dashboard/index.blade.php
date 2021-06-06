@@ -151,14 +151,17 @@
     <script src="{{ asset('assets/dashboard-layouts/libs/ladda/ladda.js') }}"></script>
     <script src="{{ asset('assets/dashboard-layouts/libs/toastr/toastr.js') }}"></script>
     <script src="{{ asset('assets/dashboard-layouts/libs/bootbox/bootbox.js') }}"></script>
+
+    {{-- libs script --}}
     @yield('script.libs')
 
-    {{-- Demo  --}}
+    {{-- Demo --}}
     <script src="{{ asset('assets/dashboard-layouts/js/demo.js') }}"></script>
     <script src="{{ asset('assets/dashboard-layouts/js/analytics.js') }}"></script>
-
-    {{-- Main script --}}
     <script src="{{ asset('assets/dashboard-layouts/js/main.js') }}"></script>
+
+    {{-- Pages script --}}
+    @yield('script')
 
     @if (session('success'))
         <script>
@@ -175,10 +178,6 @@
             });
         </script>
     @endif
-
-    {{-- Pages script --}}
-    @yield('script')
-
 </body>
 
 </html>

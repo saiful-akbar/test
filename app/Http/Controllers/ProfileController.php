@@ -21,10 +21,7 @@ class ProfileController extends Controller
         $user = User::find(Auth::user()->id);
         $profile = $user->profile()->first();
 
-        return view('pages.dashboard-profile.index', [
-            'profile' => $profile,
-            'user' => $user,
-        ]);
+        return view('pages.dashboard-profile.index', compact("user", "profile"));
     }
 
     /**
@@ -44,9 +41,15 @@ class ProfileController extends Controller
         $user->username = htmlspecialchars($request->username);
         $user->save();
 
-        return redirect()->route('dashboard.profile')->with("account-updated", "Account updated successfully");
+        return redirect()->route('dashboard.profile')->with("success", "Account updated successfully");
     }
 
+    /**
+     * Method untuk update profile
+     *
+     * @param Request $request
+     * @param Profile $profile
+     */
     public function updateProfile(Request $request, Profile $profile)
     {
         $min_date = date('Y') - 100;
@@ -94,51 +97,6 @@ class ProfileController extends Controller
             "profile_email"          => htmlspecialchars($request->email),
         ]);
 
-        return redirect()->route('dashboard.profile')->with("profile-updated", "Profile updated successfully");
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Profile  $profile
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Profile $profile)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Profile  $profile
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Profile $profile)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Profile  $profile
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Profile $profile)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Profile  $profile
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Profile $profile)
-    {
-        //
+        return redirect()->route('dashboard.profile')->with("success", "Profile updated successfully");
     }
 }

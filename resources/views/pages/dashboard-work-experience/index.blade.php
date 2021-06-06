@@ -19,24 +19,26 @@
     <div class="row mb-3">
         <div class="col-sm-12">
             <div class="card">
-                <div class="card-header">
-                    <a href="{{ route('dashboard.work-experience.create') }}" class="btn btn-primary btn-round" >
-                        <i class="feather icon-plus-circle"></i> Add Work Experience
-                    </a>
+                <div class="card-header with-elements d-flex justify-content-between">
+                    <h4 class="card-header-title mr-2">Work Experience List</h4>
+                    <div class="card-header-elements">
+                        <a href="{{ route('dashboard.work-experience.create') }}" class="btn btn-primary btn-round" >
+                            <i class="feather icon-plus-circle"></i> Add Work Experience
+                        </a>
+                    </div>
                 </div>
+
                 <div class="card-body">
                     <div class="text-center loading">
                         <div class="spinner-border text-primary" role="status">
                             <span class="sr-only">Loading...</span>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-sm-12">
                             <table id="table-work-experience" class="table table-hover content-show" width="100%"></table>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

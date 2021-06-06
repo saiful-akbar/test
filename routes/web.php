@@ -112,5 +112,16 @@ Route::middleware(["auth"])->group(function () {
             Route::get('/{id}', [WorkExperienceController::class, 'detail'])->name('api.work-experience.detail');
             Route::delete('/{id}', [WorkExperienceController::class, 'delete'])->name('api.work-experience.delete');
         });
+
+        /**
+         * Route group api skill
+         */
+        Route::prefix('skill')->group(function () {
+            Route::get('/', [SkillController::class, 'getData'])->name('api.skill');
+            Route::post('/', [SkillController::class, 'store'])->name('api.skill.store');
+            Route::get('/{skill}/edit', [SkillController::class, 'edit'])->name('api.skill.edit');
+            Route::patch('/{skill}', [SkillController::class, 'update'])->name('api.skill.update');
+            Route::delete('/{skill}', [SkillController::class, 'destroy'])->name('api.skill.delete');
+        });
     });
 });

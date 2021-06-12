@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
@@ -16,32 +14,10 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $user = User::find(Auth::user()->id);
-        $profile = $user->profile()->first();
-
-        return view('pages.dashboard-profile.index', compact("user", "profile"));
-    }
-
-    /**
-     * method untuk update user akun
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function updateAccount(Request $request, User $user)
-    {
-        $request->validate(['username' => 'required|string|max:100']);
-
-        if (isset($request->password) && !empty($request->password)) {
-            $request->validate(['password' => 'min:6']);
-            $user->password = Hash::make(htmlspecialchars($request->password));
-        }
-
-        $user->username = htmlspecialchars($request->username);
-        $user->save();
-
-        return redirect()->route('dashboard.profile')->with("success", "Account updated successfully");
+        $profile = Profile::where('user_id', Auth::user()->id)->first();
+        return view('pages.dashboard-account.index', compact("profile"));
     }
 
     /**

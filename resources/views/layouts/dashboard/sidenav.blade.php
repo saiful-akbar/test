@@ -37,10 +37,10 @@
         <li class="sidenav-header small font-weight-semibold">Components</li>
 
         {{-- account & profile --}}
-        <li class="sidenav-item {{ Request::is('app/profile*') ? 'active' : null }}">
-            <a href="{{ route('dashboard.profile') }}" class="sidenav-link">
+        <li class="sidenav-item {{ Request::is('app/account*') ? 'active' : null }}">
+            <a href="{{ route('dashboard.account') }}" class="sidenav-link">
                 <i class="sidenav-icon feather icon-user"></i>
-                <div>Account & Profile</div>
+                <div>Account Setting</div>
             </a>
         </li>
 

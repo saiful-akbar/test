@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Education;
 use App\Models\Skill;
 use App\Models\Message;
 use App\Models\Profile;
-use App\Models\Education;
-use Illuminate\Http\Request;
 use App\Models\WorkExperience;
+use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
@@ -19,11 +19,39 @@ class MainController extends Controller
     public function index()
     {
         $profile = Profile::first();
-        $skills = Skill::where("skill_publish", 1)->orderBy('skill_name', 'asc')->get();
-        $educations = Education::where('education_publish', 1)->orderBy('education_from', 'desc')->get();
-        $work_experiences = WorkExperience::where('we_publish', 1)->orderBy('we_from', 'desc')->get();
 
-        return view("pages.main-home.index", compact('profile', 'skills', 'educations', 'work_experiences'));
+        return view("pages.main-home.index", compact('profile'));
+    }
+
+    /**
+     * Method view about page
+     */
+    public function about()
+    {
+        $profile = Profile::first();
+        $skills = Skill::where('skill_publish', 1)->orderBy('skill_name', 'asc')->get();
+
+        return view('pages.main-about.index', compact('profile', 'skills'));
+    }
+
+    /**
+     * Method view resume
+     */
+    public function resume()
+    {
+        $educations = Education::where('education_publish', 1)->orderBy('education_to', 'desc')->get();
+        $work_experiences = WorkExperience::where('we_publish', 1)->orderBy('we_to', 'desc')->get();
+
+        return view('pages.main-resume.index', compact('educations', 'work_experiences'));
+    }
+
+    /**
+     * Method view contact page
+     */
+    public function contact()
+    {
+        $profile = Profile::first();
+        return view('pages.main-contact.index', compact('profile'));
     }
 
     /**
@@ -40,7 +68,7 @@ class MainController extends Controller
         ]);
 
         Message::create([
-            "message_name"        => htmlspecialchars($request->name),
+            "message_name"        => htmlspecialchars(ucwords($request->name)),
             "message_email"       => htmlspecialchars($request->email),
             "message_subject"     => htmlspecialchars($request->subject),
             "message_description" => htmlspecialchars($request->message),

@@ -48,45 +48,50 @@ class DatabaseSeeder extends Seeder
             "profile_email"          => "saifulakbar.job@gmail.com",
         ]);
 
-        // Create sosmed data
-        DB::table("sosmeds")->insert([
+        // Create socmed data
+        DB::table("socmeds")->insert([
             [
                 "user_id"     => $user->id,
-                "sosmed_name" => "WhatsApp",
-                "sosmed_url"  => "https://api.whatsapp.com/send/?phone=6289673662880",
-                "sosmed_icon" => "bx bxl-whatsapp",
+                "socmed_name" => "WhatsApp",
+                "socmed_url"  => "https://api.whatsapp.com/send/?phone=6289673662880",
+                "socmed_icon" => "fab fa-whatsapp",
+                "socmed_publish" => true,
                 "created_at"  => now(),
                 "updated_at"  => now()
             ],
             [
                 "user_id"     => $user->id,
-                "sosmed_name" => "Twitter",
-                "sosmed_url"  => "https://twitter.com/Saiful_akbar13/",
-                "sosmed_icon" => "bx bxl-twitter",
+                "socmed_name" => "Twitter",
+                "socmed_url"  => "https://twitter.com/Saiful_akbar13/",
+                "socmed_icon" => "fab fa-twitter",
+                "socmed_publish" => true,
                 "created_at"  => now(),
                 "updated_at"  => now()
             ],
             [
                 "user_id"     => $user->id,
-                "sosmed_name" => "Facebook",
-                "sosmed_url"  => "https://web.facebook.com/ackbar.syaiful/",
-                "sosmed_icon" => "bx bxl-facebook",
+                "socmed_name" => "Facebook",
+                "socmed_url"  => "https://web.facebook.com/ackbar.syaiful/",
+                "socmed_icon" => "fab fa-facebook",
+                "socmed_publish" => true,
                 "created_at"  => now(),
                 "updated_at"  => now()
             ],
             [
                 "user_id"     => $user->id,
-                "sosmed_name" => "Instagram",
-                "sosmed_url"  => "https://www.instagram.com/saifulakbar13/",
-                "sosmed_icon" => "bx bxl-instagram",
+                "socmed_name" => "Instagram",
+                "socmed_url"  => "https://www.instagram.com/saifulakbar13/",
+                "socmed_icon" => "fab fa-instagram",
+                "socmed_publish" => true,
                 "created_at"  => now(),
                 "updated_at"  => now()
             ],
             [
                 "user_id"     => $user->id,
-                "sosmed_name" => "Github",
-                "sosmed_url"  => "https://github.com/saiful-akbar/",
-                "sosmed_icon" => "bx bxl-github",
+                "socmed_name" => "Github",
+                "socmed_url"  => "https://github.com/saiful-akbar/",
+                "socmed_icon" => "fab fa-github",
+                "socmed_publish" => true,
                 "created_at"  => now(),
                 "updated_at"  => now()
             ],

@@ -34,7 +34,7 @@ class WorkExperience extends Model
      */
     public function getCreatedAtAttribute()
     {
-        return Carbon::parse($this->attributes['created_at'])->format('d M Y H:i');
+        return Carbon::parse($this->attributes['created_at'])->diffForHumans();
     }
 
     /**
@@ -42,6 +42,6 @@ class WorkExperience extends Model
      */
     public function getUpdatedAtAttribute()
     {
-        return Carbon::parse($this->attributes['updated_at'])->format('d M Y H:i');
+        return Carbon::parse($this->attributes['updated_at'])->diffForHumans();
     }
 }

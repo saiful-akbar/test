@@ -9,17 +9,16 @@ $messages = Message::orderBy('message_read_status', 'asc')
     ->limit(5)
     ->get();
 
+
+$notif = $new_message > 0 ? "notifications" : "messages";
+
 @endphp
 
 
-<div class="demo-navbar-messages nav-item dropdown mr-lg-3">
-    <a class="nav-link dropdown-toggle hide-arrow" href="#" data-toggle="dropdown">
+<div class="demo-navbar-{{ $notif }} nav-item dropdown mr-lg-3">
+    <a class="nav-link dropdown-toggle hide-arrow" href="#" data-toggle="dropdown" aria-expanded="false">
         <i class="feather icon-mail navbar-icon align-middle"></i>
-
-        @if ($new_message > 0)
-            <span class="badge badge-success badge-dot indicator"></span>
-        @endif
-
+        @if ($new_message > 0)<span class="badge badge-success badge-dot indicator"></span>@endif
         <span class="d-lg-none align-middle">&nbsp; Messages</span>
     </a>
 

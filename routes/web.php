@@ -2,19 +2,23 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\EducationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\SkillController;
+use App\Http\Controllers\SocmedController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SkillController;
+use App\Http\Controllers\EducationController;
 use App\Http\Controllers\WorkExperienceController;
-use App\Models\WorkExperience;
 
 /**
  * Route guest
  */
 Route::get("/", [MainController::class, "index"])->name("main.home");
+Route::get("/about", [MainController::class, "about"])->name("main.about");
+Route::get("/resume", [MainController::class, "resume"])->name("main.resume");
+Route::get("/contact", [MainController::class, "contact"])->name("main.contact");
 Route::post("/message", [MainController::class, "sendMessage"])->name("main.send.message");
 
 /**
@@ -54,10 +58,18 @@ Route::middleware(["auth"])->group(function () {
         /**
          * Route profile
          */
-        Route::prefix("profile")->group(function () {
-            Route::get("/", [ProfileController::class, "index"])->name("dashboard.profile");
-            Route::patch("/{profile}", [ProfileController::class, "updateProfile"])->name("dashboard.profile.update");
-            Route::patch("/account/{user}", [ProfileController::class, "updateAccount"])->name("dashboard.account.update");
+        Route::prefix("account")->group(function () {
+
+            // Route account
+            Route::get("/", [UserController::class, "index"])->name("dashboard.account");
+            Route::patch("/{user}", [UserController::class, "update"])->name("dashboard.account.update");
+
+            // Route profile
+            Route::get("/profile", [ProfileController::class, "index"])->name("dashboard.profile");
+            Route::patch("/profile/{profile}", [ProfileController::class, "updateProfile"])->name("dashboard.profile.update");
+
+            // Route social media
+            Route::get('/socmed', [SocmedController::class, 'index'])->name('dashboard.socmed');
         });
 
         /**
@@ -122,6 +134,13 @@ Route::middleware(["auth"])->group(function () {
             Route::get('/{skill}/edit', [SkillController::class, 'edit'])->name('api.skill.edit');
             Route::patch('/{skill}', [SkillController::class, 'update'])->name('api.skill.update');
             Route::delete('/{skill}', [SkillController::class, 'destroy'])->name('api.skill.delete');
+        });
+
+        /**
+         * Route group api socmed
+         */
+        Route::prefix('socmed')->group(function () {
+            Route::get('/', [SocmedController::class, 'dataTable'])->name('api.socmed');
         });
     });
 });

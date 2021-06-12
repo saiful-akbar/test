@@ -31,7 +31,7 @@
                         {{-- Sender & date --}}
                         <div class="mb-1">
                             {{ $message->message_name }}
-                            <<a href="mailto:{{ $message->message_email }}" target="_blank">{{ $message->message_email }}</a>>
+                            <<a href="mailto:{{ $message->message_email }}?subject={{ $message->message_subject }}">{{ $message->message_email }}</a>>
                             <span class="text-muted ml-2">{{ $message->created_at }}</span>
                         </div>
 

@@ -35,8 +35,9 @@ class WorkExperienceController extends Controller
             ->addColumn('period', function ($we) {
                 return "{$we->we_from} - {$we->we_to}";
             })
-            ->editColumn('id', '{{$id}}')
-            ->removeColumn('password')
+            ->setRowClass(function ($we) {
+                return $we->we_publish == 0 ? 'alert-danger' : null;
+            })
             ->make(true);
     }
 

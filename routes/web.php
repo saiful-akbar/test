@@ -1,5 +1,6 @@
 <?php
 
+use App\DataTables\UsersDataTable;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
@@ -141,6 +142,7 @@ Route::middleware(["auth"])->group(function () {
          */
         Route::prefix('socmed')->group(function () {
             Route::get('/', [SocmedController::class, 'dataTable'])->name('api.socmed');
+            Route::post('/', [SocmedController::class, 'store'])->name('api.socmed.store');
         });
     });
 });

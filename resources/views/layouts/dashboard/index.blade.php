@@ -53,6 +53,13 @@
     <div class="page-loader">
         <div class="bg-primary"></div>
     </div>
+
+
+    <div id="preloader">
+        <div class="spinner-border text-primary" role="status" aria-hidden="true" style="width: 3rem; height: 3rem;">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
     {{-- [ Preloader ] Ebd --}}
 
 

@@ -13,8 +13,7 @@ $(document).ready(function () {
     });
 
     // Hide loading
-    $(".loading").hide();
-    $(".content-show").show();
+    $("#preloader").fadeOut();
 });
 
 /**
@@ -58,6 +57,5 @@ function time() {
 }
 
 (function () {
-    // Pemasangan jam
-    window.setTimeout("time()", 1000);
+    window.setTimeout("time()", 1000); // Pemasangan jam
 })();

@@ -25,13 +25,24 @@ class SocmedController extends Controller
     public function dataTable()
     {
         $socmeds = Socmed::all();
-
         return Datatables::of($socmeds)
             ->addColumn('action', function ($socmed) {
                 return "
-                    <button class='btn btn-sm btn-outline-success btn-round mr-2'>Edit</button>
-                    <button class='btn btn-sm btn-outline-danger btn-round'>Delete</button>
+                    <button onclick='handleOpenModalForm(`Edit`, {$socmed->id})' class='btn btn-sm btn-outline-success btn-round mr-2'>Edit</button>
+                    <button onclick='destroy({$socmed->id})' class='btn btn-sm btn-outline-danger btn-round'>Delete</button>
                 ";
-            })->make(true);
+            })
+            ->setRowClass(function ($socmed) {
+                return $socmed->socmed_publish == 0 ? 'alert-danger' : null;
+            })
+            ->make(true);
+    }
+
+    public function store(Request $request)
+    {
+        return response()->json([
+            "message" => "Added social media successfully",
+            "request" => $request->all()
+        ], 200);
     }
 }

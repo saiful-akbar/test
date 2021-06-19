@@ -23,13 +23,13 @@
                 </div>
 
                 <div class="card-body">
-                    <table id="table-skill" class="table table-hover" width="100%"></table>
+                    <table id="table-skill" class="table" width="100%"></table>
                 </div>
             </div>
         </div>
     </div>
 
-    {{-- Modal Detail --}}
+    {{-- Modal form --}}
     <div class="modal fade" id="modal-form">
         <div class="modal-dialog">
             <form class="modal-content" method="post" name="add" action="{{ route('api.skill.store') }}" autocomplete="off">
@@ -171,6 +171,7 @@
                 }"></i> ${type.trim().toLowerCase() == "add" ? "Add" : "Update"}`
             );
 
+            // Cek apakan type bernilai add atau selain daripada itu
             if (type.trim().toLowerCase() == "add") {
                 modal.modal({ show: true, backdrop: "static" }); // open modal
             } else {
@@ -185,10 +186,7 @@
 
                         // set value pada form
                         $("#skill_name").val(skill_name);
-                        $("#publish").attr(
-                            "checked",
-                            skill_publish == 1 ? true : false
-                        );
+                        $("#publish").attr("checked", skill_publish == 1 ? true : false);
                     },
                     error: function (err) {
                         toast("Error", `${err.status} : ${err.responseJSON.message}`);

@@ -7,29 +7,6 @@
 @endsection
 
 @section('content')
-
-    @if (session('success'))
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="alert alert-dark-success alert-dismissible fade show">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    {{ session('success') }}
-                </div>
-            </div>
-        </div>
-    @endif
-
-    @if (session('failed'))
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="alert alert-dark-danger alert-dismissible fade show">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    {{ session('failed') }}
-                </div>
-            </div>
-        </div>
-    @endif
-
     <div class="row mb-3">
         <div class="col-sm-12">
             <div class="card">
@@ -44,7 +21,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="table-responsive">
-                                <table class="table table-hover table-striped">
+                                <table class="table">
                                     <thead>
                                         <tr>
                                             <th>Level</th>
@@ -56,7 +33,7 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($educations as $education)
-                                            <tr>
+                                            <tr class=" {{ $education->education_publish == 0 ? 'alert-danger' : null}}">
                                                 <td>{{ $education->education_level }}</td>
                                                 <td>{{ $education->education_school }}</td>
                                                 <td>{{ $education->education_from }} - {{ $education->education_to }}</td>

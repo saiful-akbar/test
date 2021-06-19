@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="card-body">
-                    <table id="table-work-experience" class="table table-hover" width="100%"></table>
+                    <table id="table-work-experience" class="table" width="100%"></table>
                 </div>
             </div>
         </div>
@@ -124,28 +124,39 @@
             columns: [
                 {
                     data: 'we_company',
+                    name: 'we_company',
                     title: 'Company'
                 },
                 {
                     data: 'we_field_of_work',
+                    name: 'we_field_of_work',
                     title: 'Field Of Work'
                 },
                 {
                     data: 'period',
+                    name: 'period',
                     title: 'Period'
                 },
                 {
                     data: 'we_publish',
+                    name: 'we_publish',
                     title: 'Publish',
                     className: 'text-center',
                     orderable: false,
                     searchable: false,
                     render: function ( data, type, row, meta ) {
-                        return `<i class="font-weight-bold feather ${data == 1 ? 'icon-check-circle text-success' : 'icon-x-circle text-danger'}"></i>`;
+                        return `
+                            <i class="font-weight-bold feather ${
+                                data == 1
+                                ? 'icon-check-circle text-success'
+                                : 'icon-x-circle text-danger'
+                            }"></i>
+                        `;
                     }
                 },
                 {
                     data: 'action',
+                    name: 'action',
                     title: 'Action',
                     className: 'text-center',
                     orderable: false,

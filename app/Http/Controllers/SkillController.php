@@ -32,7 +32,11 @@ class SkillController extends Controller
                     <button onclick='handleOpenModalForm(`edit`, {$skill->id})' class='btn btn-sm btn-outline-success btn-round mr-2'>Edit</button>
                     <button onclick='destroy({$skill->id})' class='btn btn-sm btn-outline-danger btn-round'>Delete</button>
                 ";
-            })->make(true);
+            })
+            ->setRowClass(function ($skill) {
+                return $skill->skill_publish == 0 ? 'alert-danger' : null;
+            })
+            ->make(true);
     }
 
     /**

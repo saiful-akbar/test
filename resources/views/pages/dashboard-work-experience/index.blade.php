@@ -2,17 +2,9 @@
 
 @section('title', 'Work Experience')
 
-@section('css.libs')
-    <link rel="stylesheet" href="{{ asset('assets/dashboard-layouts/libs/datatables/datatables.css') }}"/>
-@endsection
-
-@section('script.libs')
-    <script src="{{ asset('assets/dashboard-layouts/libs/datatables/datatables.js') }}"></script>
-@endsection
-
 
 @section('breadcrumb')
-<li class="breadcrumb-item active">Work Experience</li>
+    <li class="breadcrumb-item active">Work Experience</li>
 @endsection
 
 @section('content')
@@ -107,7 +99,17 @@
 @endsection
 
 
-@section('script')
+@push('css.libs')
+    <link rel="stylesheet" href="{{ asset('assets/dashboard-layouts/libs/datatables/datatables.css') }}"/>
+@endpush
+
+
+@push('script.libs')
+    <script src="{{ asset('assets/dashboard-layouts/libs/datatables/datatables.js') }}"></script>
+@endpush
+
+
+@push('script')
     <script>
 
         // inisilisasi datatable
@@ -233,4 +235,4 @@
             });
         }
     </script>
-@endsection
+@endpush

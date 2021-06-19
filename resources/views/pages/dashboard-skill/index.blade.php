@@ -2,13 +2,11 @@
 
 @section('title', 'Skill')
 
-@section('css.libs')
-    <link rel="stylesheet" href="{{ asset('assets/dashboard-layouts/libs/datatables/datatables.css') }}"/>
-@endsection
 
 @section('breadcrumb')
-<li class="breadcrumb-item active">Skill</li>
+    <li class="breadcrumb-item active">Skill</li>
 @endsection
+
 
 @section('content')
     <div class="row mb-3">
@@ -76,15 +74,21 @@
     </div>
 @endsection
 
-@section('script.libs')
-    <script src="{{ asset('assets/dashboard-layouts/libs/datatables/datatables.js') }}"></script>
-@endsection
 
-@section('script')
+@push('css.libs')
+    <link rel="stylesheet" href="{{ asset('assets/dashboard-layouts/libs/datatables/datatables.css') }}"/>
+@endpush
+
+
+@push('script.libs')
+    <script src="{{ asset('assets/dashboard-layouts/libs/datatables/datatables.js') }}"></script>
+@endpush
+
+
+@push('script')
     <script>
-        /*
-        * inisilisasi datatable
-        */
+
+        /* inisilisasi datatable */
         const dataTable = $("#table-skill").DataTable({
             processing: true,
             serverSide: true,
@@ -134,12 +138,7 @@
             ],
         });
 
-        /**
-        * Handle open modal form
-        *
-        * @param {String} type
-        * @param {integer} id
-        */
+        /* Handle open modal form */
         function handleOpenModalForm(type = "Add", id = null) {
             const modal = $("#modal-form");
             const title = $("#modal-form .modal-title");
@@ -195,9 +194,7 @@
             }
         }
 
-        /**
-        * Handle close modal form
-        */
+        /* Handle close modal form */
         function handleCloseModalForm() {
             $("#modal-form form")[0].reset(); // reset form
             $("#publish").attr("checked", true); // set publish menjadi true
@@ -205,11 +202,7 @@
             $("#modal-form .is-invalid").removeClass("is-invalid"); // remove invalid class
         }
 
-        /**
-        * disabled || readonly form
-        *
-        * @param {Boolean} value
-        */
+        /* disabled || readonly form */
         function isDissableForm(value = false) {
             const button = $("#modal-form button");
             const input = $("#modal-form form :input");
@@ -220,9 +213,7 @@
             value ? spinner.show() : spinner.hide();
         }
 
-        /**
-        * Handle submit form pada modal
-        */
+        /* Handle submit form pada modal */
         $("#modal-form form").submit(function (e) {
             e.preventDefault();
             isDissableForm(true);
@@ -261,11 +252,7 @@
             });
         });
 
-        /**
-        * Delete data skill
-        *
-        * @param {Integer} id
-        */
+        /* Delete data skill */
         function destroy(id) {
             bootbox.confirm({
                 title: "Delete",
@@ -305,4 +292,4 @@
             });
         }
     </script>
-@endsection
+@endpush

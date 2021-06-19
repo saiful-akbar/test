@@ -1,13 +1,3 @@
-@section('css.libs')
-    <link rel="stylesheet" href="{{ asset('assets/dashboard-layouts/libs/datatables/datatables.css') }}"/>
-@endsection
-
-@section('script.libs')
-    <script src="{{ asset('assets/dashboard-layouts/libs/datatables/datatables.js') }}"></script>
-@endsection
-
-
-
 <div class="card">
     <div class="card-header with-elements">
         <div class="card-header-elements">
@@ -38,14 +28,14 @@
                 <div class="form-row">
                     <div class="form-group col-md-6 col-sm-12 mb-4">
                         <label class="form-label">Social Media Name <small class="text-danger">*</small></label>
-                        <input id="socmed_name" name="socmed_name" class="form-control" placeholder="Enter social media name..." autofocus required>
+                        <input id="socmed_name" name="socmed_name" class="form-control" placeholder="Enter social media name..." autofocus >
                         <small class="invalid-feedback" data-error="socmed_name"></small>
                         <div class="clearfix"></div>
                     </div>
 
                     <div class="form-group col-md-6 col-sm-12 mb-4">
                         <label class="form-label">Icon <small class="text-danger">*</small></label>
-                        <input id="socmed_icon" name="socmed_icon" class="form-control" placeholder="Enter url..." autofocus required>
+                        <input id="socmed_icon" name="socmed_icon" class="form-control" placeholder="Enter url..." autofocus >
                         <small class="form-text text-muted">Use font awesome icons</small>
                         <small class="invalid-feedback" data-error="socmed_icon"></small>
                         <div class="clearfix"></div>
@@ -55,7 +45,7 @@
                 <div class="form-row">
                     <div class="form-group col-sm-12 mb-4">
                         <label class="form-label">Url <small class="text-danger">*</small></label>
-                        <input id="socmed_url" name="socmed_url" class="form-control" placeholder="Enter url..." autofocus required>
+                        <input id="socmed_url" name="socmed_url" class="form-control" placeholder="Enter url..." autofocus >
                         <small class="invalid-feedback" data-error="socmed_url"></small>
                         <div class="clearfix"></div>
                     </div>
@@ -64,7 +54,7 @@
                 <div class="form-row">
                     <div class="form-group col-sm-12 mb-4">
                         <label class="switcher">
-                            <input type="checkbox" name="publish" id="publish" class="switcher-input" checked>
+                            <input type="checkbox" name="socmed_publish" id="socmed_publish" class="switcher-input" checked>
                             <span class="switcher-indicator">
                                 <span class="switcher-yes"></span>
                                 <span class="switcher-no"></span>
@@ -88,8 +78,17 @@
 </div>
 
 
+@push('css.libs')
+    <link rel="stylesheet" href="{{ asset('assets/dashboard-layouts/libs/datatables/datatables.css') }}"/>
+@endpush
 
-@section('script')
+
+@push('script.libs')
+    <script src="{{ asset('assets/dashboard-layouts/libs/datatables/datatables.js') }}"></script>
+@endpush
+
+
+@push('script')
     <script>
 
         /* Inisialisasi dataTable */
@@ -100,7 +99,7 @@
             lengthChange: false,
             pageLength: 10,
             language: {
-                info: "Rows _START_ - _END_ of _TOTAL_"
+                info: "Rows _START_ - _END_ of _TOTAL_",
             },
             ajax: url("api/app/socmed"),
             columns: [
@@ -117,7 +116,7 @@
                     orderable: false,
                     searchable: false,
                     render: function (data, type, row, meta) {
-                        return `<i class="font-weight-bold ${data}"></i>`;
+                        return `<i style="font-size: 20px;" class="${data}"></i>`;
                     },
                 },
                 {
@@ -131,8 +130,8 @@
                         return `
                             <i class="font-weight-bold feather ${
                                 data == 1
-                                ? "icon-check-circle text-success"
-                                : "icon-x-circle text-danger"
+                                    ? "icon-check-circle text-success"
+                                    : "icon-x-circle text-danger"
                             }"></i>
                         `;
                     },
@@ -143,9 +142,9 @@
                     title: "Url",
                     orderable: false,
                     searchable: false,
-                    render: function(data) {
+                    render: function (data) {
                         return `<a href="${data}" target="_blank">${data}</a>`;
-                    }
+                    },
                 },
                 {
                     data: "action",
@@ -162,7 +161,7 @@
         function handleCloseModalForm() {
             $("#modal-form").modal("hide"); // close modal
             $("#modal-form form")[0].reset(); // reset form
-            $("#publish").attr("checked", true); // set publish menjadi true
+            $("#socmed_publish").attr("checked", true); // set publish menjadi true
             $("#modal-form form :input").removeClass("is-invalid"); // remove invalid class pada form
         }
 
@@ -178,29 +177,126 @@
         }
 
         /* Fungsi handle open modal form */
-        function handleOpenModalForm(type = 'Add', id = null) {
+        function handleOpenModalForm(type = "Add", id = null) {
             const modal = $("#modal-form");
             const title = $("#modal-form .modal-title");
             const form = $("#modal-form form");
             const btnSubmit = $("#modal-form button[type=submit]");
             const actionType = type.trim().toLowerCase();
 
+            form.attr("name", actionType); // set attr name pada form
+            form.attr("action", url(actionType == "add" ? "api/app/socmed" : `api/app/socmed/${id}`)); // set attr action pada form
+
             // Set title, button submit
-            title.text(actionType == 'add' ? 'Add Social Media' : 'Edit Social Media');
+            title.text(actionType == "add" ? "Add Social Media" : "Edit Social Media");
             btnSubmit.html(`
                 <i class="feather ${
-                    actionType == 'add'
-                        ? 'icon-plus-circle'
-                        : 'icon-edit-1'
+                    actionType == "add" ? "icon-plus-circle" : "icon-edit-1"
                 }"></i> ${actionType == "add" ? "Add" : "Update"}
             `);
 
-            if (actionType == 'add') {
-                $('#modal-form').modal('show');
+            if (actionType == "add") {
+                modal.modal("show");
             } else {
-                alert('Edit')
+                $.ajax({
+                    type: "GET",
+                    url: url(`api/app/socmed/${id}/edit`),
+                    dataType: "json",
+                    success: function (res) {
+
+                        // open modal
+                        modal.modal("show");
+
+                        // set value pada input
+                        $("#socmed_name").val(res.data.socmed_name);
+                        $("#socmed_icon").val(res.data.socmed_icon);
+                        $("#socmed_url").val(res.data.socmed_url);
+                        $("#socmed_publish").attr("checked", res.data.socmed_publish == 1 ? true : false);
+                    },
+                    error: function (err) {
+                        toast("Error", `${err.status} : ${err.responseJSON.message}`);
+                    },
+                });
             }
         }
 
+        /* Handle submit modal form */
+        $("#modal-form form").submit(function (e) {
+            e.preventDefault();
+            isDissableForm(true);
+
+            const { name, action } = e.target;
+
+            $.ajax({
+                type: name == "add" ? "post" : "patch",
+                url: action,
+                data: $(this).serialize(),
+                dataType: "json",
+                success: function (res) {
+                    isDissableForm(false);
+                    handleCloseModalForm();
+                    toast("Success", res.message);
+                    dataTable.ajax.reload();
+                },
+                error: function (err) {
+                    isDissableForm(false);
+
+                    const { errors, message } = err.responseJSON;
+
+                    if (err.status == 422) {
+                        Object.keys(errors).find((key) => {
+                            $(`#${key}`).addClass("is-invalid");
+                            $(`small[data-error=${key}]`).text(errors[key].join(" "));
+                        });
+                    } else {
+                        handleCloseModalForm();
+                        bootbox.alert({
+                            title: `Error : ${err.status}`,
+                            message: message,
+                        });
+                    }
+                },
+            });
+        });
+
+        /* Fungsi delete */
+        function destroy(id) {
+            bootbox.confirm({
+                title: "Delete",
+                message: "Are you sure you want to permanently delete this data?",
+                buttons: {
+                    confirm: {
+                        label: "Delete",
+                        className: "btn-danger btn-round",
+                    },
+                    cancel: {
+                        label: "Cancel",
+                        className: "btn-outline-secondary btn-round",
+                    },
+                },
+                callback: (result) => {
+                    if (result) {
+                        $.ajax({
+                            type: "DELETE",
+                            url: url(`api/app/socmed/${id}`),
+                            dataType: "json",
+                            data: {
+                                _token: $("meta[name=csrf-token]").attr("content"),
+                            },
+                            success: function (res) {
+                                toast("Success", res.message);
+                                dataTable.ajax.reload();
+                            },
+                            error: function (err) {
+                                bootbox.alert({
+                                    title: `Error: ${err.status}`,
+                                    message: err.responseJSON.message,
+                                });
+                            },
+                        });
+                    }
+                },
+            });
+        }
     </script>
-@endsection
+@endpush

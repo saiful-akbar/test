@@ -170,7 +170,17 @@
 @endsection
 
 
-@section('script')
+@push('css.libs')
+    <link rel="stylesheet" href="{{ asset('assets/dashboard-layouts/libs/select2/select2.css') }}">
+@endpush
+
+
+@push('script.libs')
+    <script src="{{ asset('assets/dashboard-layouts/libs/select2/select2.js') }}"></script>
+@endpush
+
+
+@push('script')
     <script>
         $(document).ready(function () {
 
@@ -215,4 +225,4 @@
             });
         });
     </script>
-@endsection
+@endpush

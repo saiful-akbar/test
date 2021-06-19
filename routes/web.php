@@ -143,6 +143,9 @@ Route::middleware(["auth"])->group(function () {
         Route::prefix('socmed')->group(function () {
             Route::get('/', [SocmedController::class, 'dataTable'])->name('api.socmed');
             Route::post('/', [SocmedController::class, 'store'])->name('api.socmed.store');
+            Route::get('/{socmed}/edit', [SocmedController::class, 'edit'])->name('api.socmed.edit');
+            Route::patch('/{socmed}', [SocmedController::class, 'update'])->name('api.socmed.update');
+            Route::delete('/{socmed}', [SocmedController::class, 'delete'])->name('api.socmed.delete');
         });
     });
 });

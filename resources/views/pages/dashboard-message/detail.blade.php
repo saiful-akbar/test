@@ -2,9 +2,6 @@
 
 @section('title', 'Message Details')
 
-@section('css')
-    <link rel="stylesheet" href="{{ asset('assets/dashboard-layouts/css/pages/messages.css') }}">
-@endsection
 
 @section('breadcrumb')
     <li class="breadcrumb-item active">
@@ -13,11 +10,13 @@
     <li class="breadcrumb-item active">Message Details</li>
 @endsection
 
+
 @section('back')
     <a href="{{ route('dashboard.message') }}" class="btn btn-default btn-round">
         <span class="fas fa-angle-left"></span>  Back
     </a>
 @endsection
+
 
 @section('content')
     <div class="row">
@@ -62,13 +61,17 @@
     </div>
 
     <form name="form-delete-message" action="{{ route('dashboard.message.delete', ['message' => $message->id]) }}" method="POST" style="display: none;">
-        @csrf
-        @method('DELETE')
+        @csrf @method('DELETE')
     </form>
 @endsection
 
 
-@section('script')
+@push('css.libs')
+    <link rel="stylesheet" href="{{ asset('assets/dashboard-layouts/css/pages/messages.css') }}">
+@endpush
+
+
+@push('script')
     <script>
         $(function() {
             $('#btn-delete-message').on('click', function (e) {
@@ -97,4 +100,4 @@
             });
         })
     </script>
-@endsection
+@endpush

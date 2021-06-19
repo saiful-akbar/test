@@ -5,15 +5,17 @@
 <head>
     <title>@yield('title') - Saiful Akbar Dashboard</title>
 
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="base-url" content="{{ url('/') }}">
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <meta name="description" content="Saiful akbar admin dashboard for personal website" />
     <meta name="keywords" content="Saiful Akbar, saifulakbar13, Saiful_akbar13, ackbar_syaiful@yahoo.com, saifu-akbar, personal website">
     <meta name="author" content="Saiful Akbar" />
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="base-url" content="{{ url('/') }}">
+
+    {{-- Icon --}}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
     {{-- Google fonts --}}
@@ -34,17 +36,13 @@
 
     {{-- Libs --}}
     <link rel="stylesheet" href="{{ asset('assets/dashboard-layouts/libs/perfect-scrollbar/perfect-scrollbar.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/dashboard-layouts/libs/select2/select2.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/dashboard-layouts/libs/ladda/ladda.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/dashboard-layouts/libs/toastr/toastr.css') }}">
-    @yield('css.libs')
+
+    {{-- Libs css --}}
+    @stack('css.libs')
 
     {{-- Main CSS --}}
     <link rel="stylesheet" href="{{ asset('assets/dashboard-layouts/css/main.css') }}">
-
-    {{-- CSS pages --}}
-    @yield('css')
-
 </head>
 
 <body>
@@ -67,7 +65,6 @@
     @guest
         @yield('content')
     @endguest
-
 
 
     {{-- [ layout auth ] Start --}}
@@ -140,7 +137,11 @@
 
 
     {{-- JQuery --}}
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"
+    ></script>
 
     {{-- Core scripts --}}
     <script src="{{ asset('assets/dashboard-layouts/js/pace.js') }}"></script>
@@ -152,15 +153,11 @@
 
     {{-- Libs --}}
     <script src="{{ asset('assets/dashboard-layouts/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
-    <script src="{{ asset('assets/dashboard-layouts/libs/select2/select2.js') }}"></script>
-    <script src="{{ asset('assets/dashboard-layouts/libs/vanilla-text-mask/vanilla-text-mask.js') }}"></script>
-    <script src="{{ asset('assets/dashboard-layouts/libs/spin/spin.js') }}"></script>
-    <script src="{{ asset('assets/dashboard-layouts/libs/ladda/ladda.js') }}"></script>
     <script src="{{ asset('assets/dashboard-layouts/libs/toastr/toastr.js') }}"></script>
     <script src="{{ asset('assets/dashboard-layouts/libs/bootbox/bootbox.js') }}"></script>
 
     {{-- libs script --}}
-    @yield('script.libs')
+    @stack('script.libs')
 
     {{-- Demo --}}
     <script src="{{ asset('assets/dashboard-layouts/js/demo.js') }}"></script>
@@ -168,8 +165,9 @@
     <script src="{{ asset('assets/dashboard-layouts/js/main.js') }}"></script>
 
     {{-- Pages script --}}
-    @yield('script')
+    @stack('script')
 
+    {{-- Notifikasi sukses --}}
     @if (session('success'))
         <script>
             $(document).ready(function () {
@@ -178,6 +176,7 @@
         </script>
     @endif
 
+    {{-- Notifikasi error --}}
     @if (session('error'))
         <script>
             $(document).ready(function () {

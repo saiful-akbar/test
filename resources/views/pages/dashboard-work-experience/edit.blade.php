@@ -27,7 +27,7 @@
                     <div class="card-body">
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label class="form-label" for="field_of_work">Field Of Work *</label>
+                                <label class="form-label" for="field_of_work">Field Of Work <small class="text-danger">*</small></label>
                                 <input
                                     id="field_of_work"
                                     name="field_of_work"
@@ -45,7 +45,7 @@
                             </div>
 
                             <div class="form-group col-md-6">
-                                <label class="form-label" for="company">Company *</label>
+                                <label class="form-label" for="company">Company <small class="text-danger">*</small></label>
                                 <input
                                     id="company"
                                     name="company"
@@ -65,7 +65,7 @@
 
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label class="form-label" for="from_period">From Period *</label>
+                                <label class="form-label" for="from_period">From Period <small class="text-danger">*</small></label>
                                 <div class="@error('from_period') is-invalid @enderror">
                                     <select
                                         name="from_period"
@@ -90,7 +90,7 @@
                             </div>
 
                             <div class="form-group col-md-6">
-                                <label class="form-label" for="to_period">To Period *</label>
+                                <label class="form-label" for="to_period">To Period <small class="text-danger">*</small></label>
                                 <div class="@error('to_period') is-invalid @enderror">
                                     <select
                                         name="to_period"
@@ -158,7 +158,17 @@
 @endsection
 
 
-@section('script')
+@push('css.libs')
+    <link rel="stylesheet" href="{{ asset('assets/dashboard-layouts/libs/select2/select2.css') }}">
+@endpush
+
+
+@push('script.libs')
+    <script src="{{ asset('assets/dashboard-layouts/libs/select2/select2.js') }}"></script>
+@endpush
+
+
+@push('script')
     <script>
         $(document).ready(function () {
 
@@ -196,4 +206,4 @@
             });
         });
     </script>
-@endsection
+@endpush

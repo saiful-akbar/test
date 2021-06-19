@@ -169,7 +169,7 @@
     </form>
 @endsection
 
-@section('script')
+@push('script')
     <script>
 
         // Fungsi menampilkan detail education
@@ -237,4 +237,4 @@
             });
         }
     </script>
-@endsection
+@endpush

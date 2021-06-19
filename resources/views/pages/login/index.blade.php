@@ -2,9 +2,9 @@
 
 @section('title', 'Login')
 
-@section('css')
+@push('css.libs')
     <link rel="stylesheet" href="{{ asset('/assets/dashboard-layouts/css/pages/authentication.css') }}">
-@endsection
+@endpush
 
 @section('content')
     <div class="authentication-wrapper authentication-3">

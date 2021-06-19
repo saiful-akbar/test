@@ -1,24 +1,21 @@
 @php
 use App\Models\Message;
 
+$messages = Message::orderBy('message_read_status', 'asc')->orderBy('created_at', 'desc')->offset(0)->limit(5)->get();
 $all_message = Message::count();
 $new_message = Message::where('message_read_status', 0)->count();
-$messages = Message::orderBy('message_read_status', 'asc')
-    ->orderBy('created_at', 'desc')
-    ->offset(0)
-    ->limit(5)
-    ->get();
-
-
-$notif = $new_message > 0 ? "notifications" : "messages";
 
 @endphp
 
 
-<div class="demo-navbar-{{ $notif }} nav-item dropdown mr-lg-3">
+<div class="demo-navbar-{{ $new_message > 0 ? "notifications" : "messages" }} nav-item dropdown mr-lg-3">
     <a class="nav-link dropdown-toggle hide-arrow" href="#" data-toggle="dropdown" aria-expanded="false">
         <i class="feather icon-mail navbar-icon align-middle"></i>
-        @if ($new_message > 0)<span class="badge badge-success badge-dot indicator"></span>@endif
+
+        @if ($new_message > 0)
+            <span class="badge badge-success badge-dot indicator"></span>
+        @endif
+
         <span class="d-lg-none align-middle">&nbsp; Messages</span>
     </a>
 

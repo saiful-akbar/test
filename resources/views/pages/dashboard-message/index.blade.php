@@ -3,11 +3,6 @@
 @section('title', 'Message')
 
 
-@section('css')
-    <link rel="stylesheet" href="{{ asset('assets/dashboard-layouts/css/pages/messages.css') }}">
-@endsection
-
-
 @section('breadcrumb')
     <li class="breadcrumb-item active">Message</li>
 @endsection
@@ -102,12 +97,17 @@
 
     {{-- Form delete --}}
     <form id="form-delete-message" method="POST" style="display: none;">
-        @method('DELETE')
-        @csrf
+        @method('DELETE') @csrf
     </form>
 @endsection
 
-@section('script')
+
+@push('css.libs')
+    <link rel="stylesheet" href="{{ asset('assets/dashboard-layouts/css/pages/messages.css') }}">
+@endpush
+
+
+@push('script')
     <script>
         $(document).ready(function () {
 
@@ -146,4 +146,4 @@
             });
         })
     </script>
-@endsection
+@endpush
